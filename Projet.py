@@ -20,42 +20,61 @@ import random as rd
 
 #Definitions des contantes :
 
+WIDTH, HEIGHT = 600, 600
+
 #Defintions des fonctions :
 
 def Avance_Serpent():
     pass
 
+
 def Position_Pomme() :
     """génération de la première pomme et quand celle ci est mangée une autre apparait à une position aléatoire"""
     pass
+
 
 def Vitesse() :
     """Creation d'un bouton permettant de changer la vitesse en trois vitesses différentes"""
     pass
 
+
 def Echec():
     """si le serpent rentre dans un mur ou dans sa propre queue la partie est perdue"""
     pass
+
 
 def Grandir_Serpent() :
     """quand le serpent mange une pomme il grandit d'une unité"""
     pass
 
+
 def Start() :
     """appuyer sur un bouton ou une touche pour démarrer la simulation"""
     pass
 
+
 def Entre_Pseudo() :
+    """A chaque début de partie le joueur doit rentrer un pseudo"""
     pass
 
 def Score() :
+    """le score est affiché sur une partie de l'écran"""
     pass
+
 
 def Score_texte() :
+    """le score est enregistré dans un fichier .txt"""
     pass
 
-########programme principale###############
+
+# Programme principal
+
 racine = tk.Tk()
-canvas = tk.Canvas(racine, height = HEIGHT, width = WIDTH, bg = "green")
+racine.title("simulation de la propagation d'un incendie")
+
+canvas = tk.Canvas(width = WIDTH, height = HEIGHT, bg = "green")
+canvas.grid()
+
 
 racine.mainloop()
+
