@@ -72,7 +72,7 @@ def Start() :
     pass
 
 
-def Entre_Pseudo() :
+def Pseudo() :
     """A chaque début de partie le joueur doit rentrer un pseudo"""
     pass
 
