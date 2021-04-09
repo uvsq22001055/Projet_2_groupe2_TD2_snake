@@ -24,6 +24,11 @@ COULEUR_FOND = '#3bbf3e'
 
 #Defintions des fonctions :
 
+def Generate_Pomme() :
+    """Génération de la pomme"""
+    pass
+
+
 def Generate_Serpent():
     """Génération du serpent"""
     pass
