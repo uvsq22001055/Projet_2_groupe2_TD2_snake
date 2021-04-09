@@ -16,6 +16,7 @@
 #Import des librairies :
 
 import tkinter as tk
+import random as rd
 
 #Definitions des contantes :
 
@@ -53,3 +54,8 @@ def Score() :
 def Score_texte() :
     pass
 
+########programme principale###############
+racine = tk.Tk()
+canvas = tk.Canvas(racine, height = HEIGHT, width = WIDTH, bg = "green")
+
+racine.mainloop()
