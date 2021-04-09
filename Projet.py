@@ -103,7 +103,3 @@ message_vitesse.grid(column = 1, row = 0)
 
 racine.mainloop()
 
-
-
-
-
