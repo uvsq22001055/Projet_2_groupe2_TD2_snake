@@ -19,7 +19,8 @@ import tkinter as tk
 
 #Definitions des contantes :
 
-WIDTH, HEIGHT = 500, 800
+WIDTH, HEIGHT = 500, 500
+COULEUR_FOND = '#3bbf3e'
 
 #Defintions des fonctions :
 
@@ -68,8 +69,10 @@ def Score_texte() :
 # Programme principal
 
 racine = tk.Tk()
-racine.title("simulation de la propagation d'un incendie")
+racine.title("snake")
 
-canvas = tk.Canvas(width = WIDTH, height = HEIGHT, bg = 'white')
+canvas = tk.Canvas(width = WIDTH, height = HEIGHT, bg = COULEUR_FOND)
+
+canvas.grid(column = 0, row = 0)
 
 racine.mainloop()
