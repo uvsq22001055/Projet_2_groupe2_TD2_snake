@@ -19,10 +19,25 @@ import tkinter as tk
 
 #Definitions des contantes :
 
-WIDTH, HEIGHT = 500, 500
+WIDTH, HEIGHT = 800, 800
 COULEUR_FOND = '#3bbf3e'
 
 #Defintions des fonctions :
+
+def Generate_Pomme() :
+    """Génération de la pomme"""
+    pass
+
+
+def Generate_Serpent():
+    """Génération du serpent"""
+    pass
+
+
+def Generate_Decor() :
+    """génération mur"""
+    pass
+
 
 def Avance_Serpent():
     pass
