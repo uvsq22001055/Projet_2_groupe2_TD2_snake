@@ -16,11 +16,15 @@
 #Import des librairies :
 
 import tkinter as tk
+import random as rd
 
 #Definitions des contantes :
 
+
 WIDTH, HEIGHT = 800, 800
 COULEUR_FOND = '#3bbf3e'
+
+
 
 #Defintions des fonctions :
 
@@ -81,13 +85,25 @@ def Score_texte() :
     """le score est enregistré dans un fichier .txt"""
     pass
 
+
 # Programme principal
 
 racine = tk.Tk()
 racine.title("snake")
 
+
 canvas = tk.Canvas(width = WIDTH, height = HEIGHT, bg = COULEUR_FOND)
 
-canvas.grid(column = 0, row = 0)
+message_score = tk.Label(racine, text = "score : 0")
+message_vitesse = tk.Label(racine, text = "vitesse : lent")
+
+canvas.grid(column = 0, row = 1, columnspan = 2)
+message_score.grid(column = 0, row = 0)
+message_vitesse.grid(column = 1, row = 0)
 
 racine.mainloop()
+
+
+
+
+
