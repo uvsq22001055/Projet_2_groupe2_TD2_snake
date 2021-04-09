@@ -24,6 +24,9 @@ COULEUR_FOND = '#3bbf3e'
 
 #Defintions des fonctions :
 
+def Generate_Decor() :
+    """génération mur"""
+
 def Avance_Serpent():
     pass
 
