@@ -29,7 +29,7 @@ def Avance_Serpent():
 
 
 def Position_Pomme() :
-    """génération de la première pomme et quand celle ci est mangée une autre apparait à une position aléatoire"""
+    """Génération de la première pomme et quand celle ci est mangée une autre apparait à une position aléatoire"""
     pass
 
 
@@ -39,17 +39,17 @@ def Vitesse() :
 
 
 def Echec():
-    """si le serpent rentre dans un mur ou dans sa propre queue la partie est perdue"""
+    """Si le serpent rentre dans un mur ou dans sa propre queue la partie est perdue"""
     pass
 
 
 def Grandir_Serpent() :
-    """quand le serpent mange une pomme il grandit d'une unité"""
+    """Quand le serpent mange une pomme il grandit d'une unité"""
     pass
 
 
 def Start() :
-    """appuyer sur un bouton ou une touche pour démarrer la simulation"""
+    """Appuyer sur un bouton ou une touche pour démarrer la simulation"""
     pass
 
 
