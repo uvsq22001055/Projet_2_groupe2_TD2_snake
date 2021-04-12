@@ -26,6 +26,7 @@ COTE = 20
 ROW, COL = (HEIGHT // COTE), (WIDTH // COTE)
 COULEUR_FOND = '#3bbf3e'
 COULEUR_MUR = '#9e6d36'
+COULEUR_POMME = '#ad0017'
 FOND = 0
 MUR = 1
 POMME = 2
@@ -40,7 +41,9 @@ etat = [[FOND for row in range(ROW)] for col in range(COL)]
 
 def Generate_Pomme() :
     """Génération de la pomme"""
-    pass
+    y = rd.randint(0, ROW)
+    x = rd.randint(0, COL)
+    etat[y][x] = POMME
 
 
 def Generate_Serpent():
@@ -70,8 +73,6 @@ def Generate_Decor() :
                 etat[y][x] = 1
             elif x == (COL - 1):
                 etat[y][x] = 1
-            else:
-                etat[y][x] = 0
     
     
 def draw():
@@ -82,7 +83,11 @@ def draw():
                 canvas.itemconfig(case[y][x], fill=coul)
             elif etat[y][x] == MUR:
                 coul = COULEUR_MUR
-                canvas.itemconfig(case[x][y], fill=coul)
+                canvas.itemconfig(case[y][x], fill=coul)
+            if etat[y][x] == POMME:
+                coul = COULEUR_POMME
+                canvas.itemconfig(case[y][x], fill=coul)
+
 
 def Avance_Serpent():
     pass
@@ -143,6 +148,7 @@ message_score.grid(column = 0, row = 0)
 message_vitesse.grid(column = 1, row = 0)
 
 base()
+Generate_Pomme()
 Generate_Decor()
 draw()
 racine.mainloop()
