@@ -22,6 +22,8 @@ import random as rd
 
 
 WIDTH, HEIGHT = 800, 800
+COTE = 20
+ROW, COL = (HEIGHT // COTE), (WIDTH // COTE)
 COULEUR_FOND = '#3bbf3e'
 
 # Variables globales:
