@@ -25,6 +25,7 @@ WIDTH, HEIGHT = 800, 800
 COTE = 20
 ROW, COL = (HEIGHT // COTE), (WIDTH // COTE)
 COULEUR_FOND = '#3bbf3e'
+COULEUR_MUR = '#9e6d36'
 MUR = 1
 POMME = 2
 SERPENT = 3
@@ -62,15 +63,18 @@ def Generate_Decor() :
                 case[y][x] = 1
             elif x == 0:
                 case[y][x] = 1
-            elif x == COL:
+            elif x == (COL - 1):
                 case[y][x] = 1
+            else:
+                case[y][x] = 0
     
     
 def draw():
-    for y in range(ROW):
-        for x in range(COL):
-            if case[y][x] == 1:
-                canvas.itemconfig(case[x][y], fill='brown')
+    for y in range(HEIGHT // COTE):
+        for x in range(WIDTH // COTE):
+            if case[x][y] == MUR:
+                coul = COULEUR_MUR
+                canvas.itemconfig(case[x][y], fill=coul)
 
 def Avance_Serpent():
     pass
@@ -133,9 +137,5 @@ message_vitesse.grid(column = 1, row = 0)
 base()
 Generate_Decor()
 draw()
-
-photo = tk.PhotoImage(file='mur.gif')
-canvas.create_image(80, 80, image = photo)
-
 racine.mainloop()
 
