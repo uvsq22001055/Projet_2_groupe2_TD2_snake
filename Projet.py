@@ -33,6 +33,7 @@ SERPENT = 3
 
 case = [[0 for row in range(ROW)] for col in range(COL)]
 
+
 #Defintions des fonctions :
 
 def Generate_Pomme() :
@@ -45,10 +46,30 @@ def Generate_Serpent():
     pass
 
 
+def base():
+    for y in range(ROW):
+        for x in range(COL):
+            case[x][y] = canvas.create_rectangle(
+                (x * COTE, y * COTE, (x + 1) * COTE, (y + 1) * COTE),
+                fill=COULEUR_FOND)
+
 def Generate_Decor() :
     """génération mur"""
-    pass
-
+    for y in range(ROW):
+        for x in range(COL):
+            if y == 0:
+                case[y][x] = 1
+            elif x == 0:
+                case[y][x] = 1
+            elif x == COL:
+                case[y][x] = 1
+    
+    
+def draw():
+    for y in range(ROW):
+        for x in range(COL):
+            if case[y][x] == 1:
+                canvas.itemconfig(case[x][y], fill='brown')
 
 def Avance_Serpent():
     pass
@@ -99,7 +120,7 @@ racine = tk.Tk()
 racine.title("snake")
 
 
-canvas = tk.Canvas(width = WIDTH, height = HEIGHT, bg = COULEUR_FOND)
+canvas = tk.Canvas(width = WIDTH, height = HEIGHT)
 
 message_score = tk.Label(racine, text = "score : 0")
 message_vitesse = tk.Label(racine, text = "vitesse : lent")
@@ -107,6 +128,10 @@ message_vitesse = tk.Label(racine, text = "vitesse : lent")
 canvas.grid(column = 0, row = 1, columnspan = 2)
 message_score.grid(column = 0, row = 0)
 message_vitesse.grid(column = 1, row = 0)
+
+base()
+Generate_Decor()
+draw()
 
 racine.mainloop()
 
