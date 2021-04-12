@@ -25,6 +25,9 @@ WIDTH, HEIGHT = 800, 800
 COTE = 20
 ROW, COL = (HEIGHT // COTE), (WIDTH // COTE)
 COULEUR_FOND = '#3bbf3e'
+MUR = 1
+POMME = 2
+SERPENT = 3
 
 # Variables globales:
 
