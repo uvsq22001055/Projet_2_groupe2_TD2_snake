@@ -26,6 +26,7 @@ COTE = 20
 ROW, COL = (HEIGHT // COTE), (WIDTH // COTE)
 COULEUR_FOND = '#3bbf3e'
 COULEUR_MUR = '#9e6d36'
+FOND = 0
 MUR = 1
 POMME = 2
 SERPENT = 3
@@ -33,7 +34,7 @@ SERPENT = 3
 # Variables globales:
 
 case = [[0 for row in range(ROW)] for col in range(COL)]
-
+etat = [[FOND for row in range(ROW)] for col in range(COL)]
 
 #Defintions des fonctions :
 
@@ -50,29 +51,36 @@ def Generate_Serpent():
 def base():
     for y in range(ROW):
         for x in range(COL):
-            case[x][y] = canvas.create_rectangle(
+            case[y][x] = canvas.create_rectangle(
                 (x * COTE, y * COTE, (x + 1) * COTE, (y + 1) * COTE),
                 outline=COULEUR_FOND,
                 fill=COULEUR_FOND)
+            etat[y][x] = FOND
+                
 
 def Generate_Decor() :
     """génération mur"""
     for y in range(ROW):
         for x in range(COL):
             if y == 0:
-                case[y][x] = 1
+                etat[y][x] = 1
             elif x == 0:
-                case[y][x] = 1
+                etat[y][x] = 1
+            elif y == (ROW - 1):
+                etat[y][x] = 1
             elif x == (COL - 1):
-                case[y][x] = 1
+                etat[y][x] = 1
             else:
-                case[y][x] = 0
+                etat[y][x] = 0
     
     
 def draw():
-    for y in range(HEIGHT // COTE):
-        for x in range(WIDTH // COTE):
-            if case[x][y] == MUR:
+    for y in range(ROW):
+        for x in range(COL):
+            if etat[y][x] == FOND:
+                coul = COULEUR_FOND
+                canvas.itemconfig(case[y][x], fill=coul)
+            elif etat[y][x] == MUR:
                 coul = COULEUR_MUR
                 canvas.itemconfig(case[x][y], fill=coul)
 
