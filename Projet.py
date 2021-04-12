@@ -138,4 +138,3 @@ photo = tk.PhotoImage(file='mur.gif')
 canvas.create_image(80, 80, image = photo)
 
 racine.mainloop()
-
