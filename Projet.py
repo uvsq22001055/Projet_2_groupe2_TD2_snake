@@ -51,6 +51,7 @@ def base():
         for x in range(COL):
             case[x][y] = canvas.create_rectangle(
                 (x * COTE, y * COTE, (x + 1) * COTE, (y + 1) * COTE),
+                outline=COULEUR_FOND,
                 fill=COULEUR_FOND)
 
 def Generate_Decor() :
