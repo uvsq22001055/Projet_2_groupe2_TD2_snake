@@ -24,7 +24,9 @@ import random as rd
 WIDTH, HEIGHT = 800, 800
 COULEUR_FOND = '#3bbf3e'
 
+# Variables globales:
 
+case = [[0 for row in range(ROW)] for col in range(COL)]
 
 #Defintions des fonctions :
 
