@@ -21,7 +21,7 @@ import random as rd
 #Definitions des contantes :
 
 
-WIDTH, HEIGHT = 800, 800
+WIDTH, HEIGHT = 600, 600
 COTE = 20
 ROW, COL = (HEIGHT // COTE), (WIDTH // COTE)
 COULEUR_FOND = '#3bbf3e'
