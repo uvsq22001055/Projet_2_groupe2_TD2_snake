@@ -36,6 +36,8 @@ SERPENT = 3
 
 case = [[0 for row in range(ROW)] for col in range(COL)]
 etat = [[FOND for row in range(ROW)] for col in range(COL)]
+score = []
+compteur = []
 
 #Defintions des fonctions :
 
@@ -48,7 +50,7 @@ def Generate_Pomme() :
 
 def Generate_Serpent():
     """Génération du serpent"""
-    pass
+    
 
 
 def base():
@@ -59,6 +61,9 @@ def base():
                 outline=COULEUR_FOND,
                 fill=COULEUR_FOND)
             etat[y][x] = FOND
+    Generate_Decor()
+    Generate_Pomme()
+    draw()
                 
 
 def Generate_Decor() :
@@ -90,7 +95,7 @@ def draw():
 
 
 def Avance_Serpent():
-    pass
+    score()
 
 
 def Vitesse() :
@@ -119,7 +124,9 @@ def Pseudo() :
 
 def Score() :
     """le score est affiché sur une partie de l'écran"""
-    pass
+    if score[0] != compteur[0]:
+        canvas.itemconfig(message_score, text=score[0])
+        score[0] = compteur[0]
 
 
 def Score_texte() :
@@ -143,7 +150,5 @@ message_score.grid(column = 0, row = 0)
 message_vitesse.grid(column = 1, row = 0)
 
 base()
-Generate_Pomme()
-Generate_Decor()
-draw()
+
 racine.mainloop()
