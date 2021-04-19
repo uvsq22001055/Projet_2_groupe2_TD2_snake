@@ -36,6 +36,10 @@ SERPENT = 3
 
 case = [[0 for row in range(ROW)] for col in range(COL)]
 etat = [[FOND for row in range(ROW)] for col in range(COL)]
+SPEED_GAME_SLOW = 2500
+SPEED_GAME_MEDIUM = 5000
+SPEED_GAME_FAST = 10000
+END = 1
 
 #Defintions des fonctions :
 
@@ -92,15 +96,27 @@ def draw():
 def Avance_Serpent():
     pass
 
+    
 
-def Position_Pomme() :
-    """Génération de la première pomme et quand celle ci est mangée une autre apparait à une position aléatoire"""
-    pass
+def Fast() :
+    """Creation d'un bouton permettant de changer la vitesse en rapide"""
+    global SPEED_GAME_FAST
+    f = "vitesse : rapide"
+    message_vitesse.configure(text = f)
 
 
-def Vitesse() :
-    """Creation d'un bouton permettant de changer la vitesse en trois vitesses différentes"""
-    pass
+def Slow():
+    """Creation d'un bouton permettant de changer la vitesse en lente"""
+    global SPEED_GAME_SLOW
+    s = "vitesse : lente"
+    message_vitesse.configure(text = s)
+
+
+def Medium():
+    """Creation d'un bouton permettant de changer la vitesse en moyenne"""
+    global SPEED_GAME_MEDIUM
+    m = "vitesse : moyenne"
+    message_vitesse.configure(text = m)
 
 
 def Echec():
@@ -115,7 +131,11 @@ def Grandir_Serpent() :
 
 def Start() :
     """Appuyer sur un bouton ou une touche pour démarrer la simulation"""
-    pass
+    global END
+    Avance_Serpent()
+    id_Game = canvas.after(SPEED_GAME_SLOW, Start)
+    if END == 0:
+        canvas.after_cancel(id_Game)
 
 
 def Pseudo() :
@@ -147,9 +167,16 @@ canvas.grid(column = 0, row = 1, columnspan = 2)
 message_score.grid(column = 0, row = 0)
 message_vitesse.grid(column = 1, row = 0)
 
+canvas.bind_all('<KeyPress-d>', Fast)
+canvas.bind_all('<KeyPress-q>', Slow)
+canvas.bind_all('<KeyPress-s>', Medium)
+canvas.bind_all('<Return>', Start)
+
+
 base()
 Generate_Pomme()
 Generate_Decor()
 draw()
+Avance_Serpent()
 racine.mainloop()
 
