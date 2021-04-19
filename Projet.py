@@ -131,7 +131,9 @@ def Score() :
 
 def Score_texte() :
     """le score est enregistré dans un fichier .txt"""
-    pass
+    f = open('score.txt', 'w')
+    f.write('Pseudo', score[0])
+    f.close()
 
 
 # Programme principal
