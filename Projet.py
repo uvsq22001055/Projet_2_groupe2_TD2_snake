@@ -41,8 +41,8 @@ etat = [[FOND for row in range(ROW)] for col in range(COL)]
 
 def Generate_Pomme() :
     """Génération de la pomme"""
-    y = rd.randint(0, ROW)
-    x = rd.randint(0, COL)
+    y = rd.randint(1, ROW-1)
+    x = rd.randint(1, COL-1)
     etat[y][x] = POMME
 
 
@@ -90,11 +90,6 @@ def draw():
 
 
 def Avance_Serpent():
-    pass
-
-
-def Position_Pomme() :
-    """Génération de la première pomme et quand celle ci est mangée une autre apparait à une position aléatoire"""
     pass
 
 
