@@ -50,7 +50,11 @@ def Generate_Pomme() :
     """Génération de la pomme"""
     y = rd.randint(1, ROW-1)
     x = rd.randint(1, COL-1)
-    etat[y][x] = POMME
+    if etat[y][x] != SERPENT and etat[y][x] != MUR:
+        etat[y][x] = POMME
+        canvas.create_oval(x*20+5, y*20+5, x*20+15 , y*20+15, fill=COULEUR_POMME)
+    else:
+        Generate_Pomme()
 
 
 def Generate_Serpent():
