@@ -197,10 +197,10 @@ canvas.bind_all('<KeyPress-s>', Medium)
 canvas.bind_all('<Return>', Start)
 canvas.bind_all('<KeyPress-v>', Vitesse)
 
-photo_pomme = Image.open("/Users/arnaudgay/Desktop/Projet_2_groupe2_TD2_snake/apple.png")
+photo_pomme = Image.open("apple.png")
 image_pomme =  ImageTk.PhotoImage(photo_pomme)
 
-photo_mur = Image.open("/Users/arnaudgay/Desktop/Projet_2_groupe2_TD2_snake/mur.png")
+photo_mur = Image.open("mur.png")
 image_mur = ImageTk.PhotoImage(photo_mur)
 
 base()
