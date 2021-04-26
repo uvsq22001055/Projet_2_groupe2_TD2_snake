@@ -52,7 +52,7 @@ def Generate_Pomme() :
     x = rd.randint(1, COL-1)
     if etat[y][x] != SERPENT and etat[y][x] != MUR:
         etat[y][x] = POMME
-        canvas.create_image(x*20+10, y*20+10,image=image)
+        canvas.create_image(x*20+10, y*20+10,image=image_pomme)
     else:
         Generate_Pomme()
 
@@ -97,7 +97,7 @@ def draw():
                 canvas.itemconfig(case[y][x], fill=coul)
             elif etat[y][x] == MUR:
                 coul = COULEUR_MUR
-                canvas.itemconfig(case[y][x], fill=coul)
+                canvas.create_image(x*20+10, y*20+10, image=image_mur)
 
 
 def Avance_Serpent():
@@ -197,8 +197,11 @@ canvas.bind_all('<KeyPress-s>', Medium)
 canvas.bind_all('<Return>', Start)
 canvas.bind_all('<KeyPress-v>', Vitesse)
 
-photo = Image.open("/Users/arnaudgay/Desktop/Projet_2_groupe2_TD2_snake/apple.png")
-image =  ImageTk.PhotoImage(photo)
+photo_pomme = Image.open("/Users/arnaudgay/Desktop/Projet_2_groupe2_TD2_snake/apple.png")
+image_pomme =  ImageTk.PhotoImage(photo_pomme)
+
+photo_mur = Image.open("/Users/arnaudgay/Desktop/Projet_2_groupe2_TD2_snake/mur.png")
+image_mur = ImageTk.PhotoImage(photo_mur)
 
 base()
 Avance_Serpent()
