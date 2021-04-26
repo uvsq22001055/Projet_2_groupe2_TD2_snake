@@ -14,7 +14,7 @@
 ################
 
 #Import des librairies :
-
+from PIL import Image, ImageTk
 import tkinter as tk
 import random as rd
 
@@ -52,7 +52,7 @@ def Generate_Pomme() :
     x = rd.randint(1, COL-1)
     if etat[y][x] != SERPENT and etat[y][x] != MUR:
         etat[y][x] = POMME
-        canvas.create_oval(x*20+5, y*20+5, x*20+15 , y*20+15, fill=COULEUR_POMME)
+        canvas.create_image(x*20+10, y*20+10,image=image)
     else:
         Generate_Pomme()
 
@@ -97,9 +97,6 @@ def draw():
                 canvas.itemconfig(case[y][x], fill=coul)
             elif etat[y][x] == MUR:
                 coul = COULEUR_MUR
-                canvas.itemconfig(case[y][x], fill=coul)
-            if etat[y][x] == POMME:
-                coul = COULEUR_POMME
                 canvas.itemconfig(case[y][x], fill=coul)
 
 
@@ -200,6 +197,10 @@ canvas.bind_all('<KeyPress-s>', Medium)
 canvas.bind_all('<Return>', Start)
 canvas.bind_all('<KeyPress-v>', Vitesse)
 
+photo = Image.open("/Users/arnaudgay/Desktop/Projet_2_groupe2_TD2_snake/apple.png")
+image =  ImageTk.PhotoImage(photo)
+
 base()
 Avance_Serpent()
+
 racine.mainloop()
