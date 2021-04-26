@@ -171,8 +171,9 @@ def Score() :
 
 def Score_texte() :
     """le score est enregistré dans un fichier .txt"""
+    pseudo = input("Rentrez votre pseudo:" "\n")
     f = open('score.txt', 'w')
-    f.write('Pseudo', score[0])
+    f.write(Pseudo, score[0])
     f.close()
 
 
