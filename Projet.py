@@ -140,6 +140,7 @@ def Vitesse():
 
 def Echec():
     """Si le serpent rentre dans un mur ou dans sa propre queue la partie est perdue"""
+    Score_texte()
     pass
 
 
