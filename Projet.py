@@ -27,6 +27,7 @@ ROW, COL = (HEIGHT // COTE), (WIDTH // COTE)
 COULEUR_FOND = '#3bbf3e'
 COULEUR_MUR = '#9e6d36'
 COULEUR_POMME = '#ad0017'
+COULEUR_SERPENT = '#014386'
 FOND = 0
 MUR = 1
 POMME = 2
@@ -59,7 +60,9 @@ def Generate_Pomme() :
 
 def Generate_Serpent():
     """Génération du serpent"""
-    pass
+    etat[15][15] = SERPENT
+    
+
 
 
 def base():
@@ -71,6 +74,7 @@ def base():
                 fill=COULEUR_FOND)
             etat[y][x] = FOND
     Generate_Decor()
+    Generate_Serpent()
     Generate_Pomme()
     draw()
                 
@@ -98,6 +102,9 @@ def draw():
             elif etat[y][x] == MUR:
                 coul = COULEUR_MUR
                 canvas.create_image(x*20+10, y*20+10, image=image_mur)
+            elif etat[x][y] == SERPENT:
+                coul = COULEUR_SERPENT
+                canvas.itemconfig(case[y][x], fill=coul)
 
 
 def Avance_Serpent():
