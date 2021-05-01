@@ -190,9 +190,9 @@ def Speed():
     racine1.title("Choix vitesse")
     racine1.geometry("320x130")
     info = tk.Label(racine1, text="Choix du mode de vitesse", font=('arial', '15'))
-    buttonl = tk.Button(racine1, text='lent', font=('arial', '10'))
-    buttonm = tk.Button(racine1, text='moyen', font=('arial', '10'))
-    buttonr = tk.Button(racine1, text='rapide', font=('arial', '10'))
+    buttonl = tk.Button(racine1, text='lent', font=('arial', '10'), command = Slow)
+    buttonm = tk.Button(racine1, text='moyen', font=('arial', '10'), command = Medium)
+    buttonr = tk.Button(racine1, text='rapide', font=('arial', '10'), command = Fast)
     info2 = tk.Label(racine1, text="Ou choix de la période en seconde", font=('arial', '15'))
     e1 = tk.Entry(racine1)
 
