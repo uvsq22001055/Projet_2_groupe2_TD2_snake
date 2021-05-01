@@ -47,7 +47,7 @@ compteur = []
 
 #Defintions des fonctions :
 
-def Generate_Pomme() :
+def Generate_Pomme():
     """Génération de la pomme"""
     y = rd.randint(1, ROW-1)
     x = rd.randint(1, COL-1)
@@ -79,7 +79,7 @@ def base():
     draw()
                 
 
-def Generate_Decor() :
+def Generate_Decor():
     """génération mur"""
     for y in range(ROW):
         for x in range(COL):
@@ -112,7 +112,7 @@ def Avance_Serpent():
 
     
 
-def Fast() :
+def Fast():
     """Creation d'un bouton permettant de changer la vitesse en rapide"""
     global SPEED_GAME_FAST
     f = "vitesse : rapide"
@@ -151,12 +151,12 @@ def Echec():
     pass
 
 
-def Grandir_Serpent() :
+def Grandir_Serpent():
     """Quand le serpent mange une pomme il grandit d'une unité"""
     pass
 
 
-def Start() :
+def Start():
     """Appuyer sur un bouton ou une touche pour démarrer la simulation"""
     global END, SPEED_GAME_FAST, SPEED_GAME_MEDIUM, SPEED_GAME_SLOW, SPEED_GAME_CHOOSE
     Avance_Serpent()
@@ -165,19 +165,19 @@ def Start() :
         canvas.after_cancel(id_Game)
 
 
-def Pseudo() :
+def Pseudo():
     """A chaque début de partie le joueur doit rentrer un pseudo"""
     pass
 
 
-def Score() :
+def Score():
     """le score est affiché sur une partie de l'écran"""
     if score[0] != compteur[0]:
         canvas.itemconfig(message_score, text=score[0])
         score[0] = compteur[0]
 
 
-def Score_texte() :
+def Score_texte():
     """le score est enregistré dans un fichier .txt"""
     pseudo = input("Rentrez votre pseudo:" "\n")
     f = open('score.txt', 'w')
