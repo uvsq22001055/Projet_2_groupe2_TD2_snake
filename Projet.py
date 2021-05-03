@@ -106,6 +106,9 @@ def draw():
             elif etat[x][y] == SERPENT:
                 coul = COULEUR_SERPENT
                 canvas.itemconfig(case[y][x], fill=coul)
+            elif etat[x][y] == TETE:
+                coul = COULEUR_SERPENT
+                canvas.itemconfig(case[y][x], fill=coul)
 
 
 def Avance_Serpent(): 
