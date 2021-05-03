@@ -125,22 +125,18 @@ def Avance_Serpent():
                 if Avance == DROITE :
                     if etat[x][y] == TETE :
                         etat[x+1][y] = TETE
-                        etat[x][y] = SERPENT
 
                 if Avance == GAUCHE :
                     if etat[x][y] == TETE :
                         etat[x-1][y] = TETE
-                        etat[x][y] = SERPENT
 
                 if Avance == BAS :
                     if etat[x][y] == TETE :
                         etat[x][y+1] = TETE
-                        etat[x][y] = SERPENT
 
                 if Avance == HAUT :
                     if etat[x][y] == TETE :
                         etat[x][y-1] = TETE
-                        etat[x][y] = SERPENT
             draw()
     print(etat)
     id_Avance_Serpent = canvas.after(1000, Avance_Serpent)
