@@ -32,6 +32,7 @@ FOND = 0
 MUR = 1
 POMME = 2
 SERPENT = 3
+Avance = 4
 
 # Variables globales:
 
@@ -108,6 +109,29 @@ def draw():
 
 
 def Avance_Serpent():
+    while Echec == False :
+        for x in range(1, len(etat)):
+            for y in range(1, len(etat)):
+                if Avance == DROITE :
+                    etat[x+1][y] = SERPENT
+                    if etat[x-1][y] != SERPENT :
+                        etat[x][y] = FOND
+
+                if Avance == GAUCHE :
+                    etat[x-1][y] = SERPENT
+                    if etat[x+1][y] != SERPENT :
+                        etat[x][y] = FOND
+
+                if Avance == BAS :
+                    etat[x][y+1] = SERPENT
+                    if etat[x][y-1] != SERPENT :
+                        etat[x][y] = FOND
+
+                if Avance == HAUT :
+                    etat[x][y-1] = SERPENT
+                    if etat[x][y+1] != SERPENT :
+                        etat[x][y] = FOND
+        score()
     pass
 
     
@@ -147,7 +171,23 @@ def Vitesse():
 
 def Echec():
     """Si le serpent rentre dans un mur ou dans sa propre queue la partie est perdue"""
-    Score_texte()
+    global Echec
+    Echec = False
+
+    for x in range(1, len(etat)):
+        for y in range(1, len(etat)):
+            if Avance == DROITE :
+                if etat[x+1][y] == MUR :
+                    Echec = True
+            if Avance == GAUCHE :
+                if etat[x-1][y] == MUR :
+                    Echec = True
+            if Avance == BAS :
+                if etat[x][y+1] == MUR :
+                    Echec = True
+            if Avance == HAUT :
+                if etat[x][y-1] == MUR :
+                    Echec = True
     pass
 
 
@@ -183,6 +223,29 @@ def Score_texte():
     f = open('score.txt', 'w')
     f.write(Pseudo, score[0])
     f.close()
+
+def AvanceGauche():
+    global Avance 
+    Avance = GAUCHE
+    pass
+
+
+def AvanceDroite():
+    global Avance
+    Avance = DROITE
+    pass
+
+
+def AvanceHaut():
+    global Avance
+    Avance = HAUT
+    pass
+
+
+def AvanceBas():
+    global Avance
+    Avance = BAS 
+    pass
 
 
 def Speed():
