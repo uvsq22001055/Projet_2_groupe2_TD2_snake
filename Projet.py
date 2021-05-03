@@ -108,31 +108,34 @@ def draw():
                 canvas.itemconfig(case[y][x], fill=coul)
 
 
-def Avance_Serpent():
+def Avance_Serpent(): 
     while Echec == False :
-        for x in range(1, len(etat)):
-            for y in range(1, len(etat)):
+        for x in range(1, len(etat)-1):
+            for y in range(1, len(etat)-1):
                 if Avance == DROITE :
-                    etat[x+1][y] = SERPENT
-                    if etat[x-1][y] != SERPENT :
-                        etat[x][y] = FOND
+                    if etat[x][y] == TETE :
+                        etat[x+1][y] = TETE
+                        etat[x][y] = SERPENT
 
                 if Avance == GAUCHE :
-                    etat[x-1][y] = SERPENT
-                    if etat[x+1][y] != SERPENT :
-                        etat[x][y] = FOND
+                    if etat[x][y] == TETE :
+                        etat[x-1][y] = TETE
+                        etat[x][y] = SERPENT
 
                 if Avance == BAS :
-                    etat[x][y+1] = SERPENT
-                    if etat[x][y-1] != SERPENT :
-                        etat[x][y] = FOND
+                    if etat[x][y] == TETE :
+                        etat[x][y+1] = TETE
+                        etat[x][y] = SERPENT
 
                 if Avance == HAUT :
-                    etat[x][y-1] = SERPENT
-                    if etat[x][y+1] != SERPENT :
-                        etat[x][y] = FOND
-        score()
-    pass
+                    if etat[x][y] == TETE :
+                        etat[x][y-1] = TETE
+                        etat[x][y] = SERPENT
+            draw()
+    print(etat)
+    id_Avance_Serpent = canvas.after(1000, Avance_Serpent)
+    if Echec == True :
+        canvas.after_cancel(id_Avance_Serpent)
 
     
 
@@ -188,6 +191,7 @@ def Echec():
             if Avance == HAUT :
                 if etat[x][y-1] == MUR :
                     Echec = True
+    canvas.after(vitesseTest, Echec)
     pass
 
 
@@ -224,25 +228,25 @@ def Score_texte():
     f.write(Pseudo, score[0])
     f.close()
 
-def AvanceGauche():
+def Avance_Gauche(event):
     global Avance 
     Avance = GAUCHE
     pass
 
 
-def AvanceDroite():
+def Avance_Droite(event):
     global Avance
     Avance = DROITE
     pass
 
 
-def AvanceHaut():
+def Avance_Haut(event):
     global Avance
     Avance = HAUT
     pass
 
 
-def AvanceBas():
+def Avance_Bas(event):
     global Avance
     Avance = BAS 
     pass
@@ -294,6 +298,10 @@ canvas.bind_all('<KeyPress-q>', Slow)
 canvas.bind_all('<KeyPress-s>', Medium)
 canvas.bind_all('<Return>', Start)
 canvas.bind_all('<KeyPress-v>', Vitesse)
+canvas.bind_all('<Right>', Avance_Droite)
+canvas.bind_all('<Left>', Avance_Gauche)
+canvas.bind_all('<Down>', Avance_Bas)
+canvas.bind_all('<Up>', Avance_Haut)
 
 photo_pomme = Image.open("apple.png")
 image_pomme = ImageTk.PhotoImage(photo_pomme)
