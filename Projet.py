@@ -33,6 +33,12 @@ MUR = 1
 POMME = 2
 SERPENT = 3
 Avance = 4
+DROITE = 5
+GAUCHE = 6 
+BAS = 7
+HAUT = 8
+TETE = 9
+vitesseTest = 2000
 
 # Variables globales:
 
@@ -45,6 +51,7 @@ SPEED_GAME_CHOOSE = 0
 END = 1
 score = []
 compteur = []
+
 
 #Defintions des fonctions :
 
@@ -61,7 +68,7 @@ def Generate_Pomme():
 
 def Generate_Serpent():
     """Génération du serpent"""
-    etat[14][14] = SERPENT
+    etat[15][15] = TETE
     
 
 
@@ -139,6 +146,7 @@ def Avance_Serpent():
     id_Avance_Serpent = canvas.after(1000, Avance_Serpent)
     if Echec == True :
         canvas.after_cancel(id_Avance_Serpent)
+    pass
 
     
 
@@ -173,7 +181,6 @@ def Vitesse():
     c = "vitesse : choisie"
     message_vitesse.configure(text = c)
     id_Game = canvas.after(SPEED_GAME_CHOOSE)
-
 
 def Echec():
     """Si le serpent rentre dans un mur ou dans sa propre queue la partie est perdue"""
