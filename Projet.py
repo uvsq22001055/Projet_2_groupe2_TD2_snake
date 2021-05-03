@@ -38,9 +38,9 @@ Avance = 4
 
 case = [[0 for row in range(ROW)] for col in range(COL)]
 etat = [[FOND for row in range(ROW)] for col in range(COL)]
-SPEED_GAME_SLOW = 2500
-SPEED_GAME_MEDIUM = 5000
-SPEED_GAME_FAST = 10000
+SPEED_GAME_SLOW = 2000
+SPEED_GAME_MEDIUM = 1000
+SPEED_GAME_FAST = 500
 SPEED_GAME_CHOOSE = 0
 END = 1
 score = []
@@ -163,7 +163,7 @@ def Medium():
 def Vitesse():
     """Creation d'un bouton permettant au joueur d'entrer une vitesse de son choix"""
     global SPEED_GAME_CHOOSE
-    SPEED_GAME_CHOOSE = int(input("entrer une vitesse : "))
+    SPEED_GAME_CHOOSE = e1 * 1000
     c = "vitesse : choisie"
     message_vitesse.configure(text = c)
     id_Game = canvas.after(SPEED_GAME_CHOOSE)
