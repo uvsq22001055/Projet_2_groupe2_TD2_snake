@@ -37,9 +37,9 @@ SERPENT = 3
 
 case = [[0 for row in range(ROW)] for col in range(COL)]
 etat = [[FOND for row in range(ROW)] for col in range(COL)]
-SPEED_GAME_SLOW = 2500
+SPEED_GAME_SLOW = 10000
 SPEED_GAME_MEDIUM = 5000
-SPEED_GAME_FAST = 10000
+SPEED_GAME_FAST = 2500
 SPEED_GAME_CHOOSE = 0
 END = 1
 score = []
