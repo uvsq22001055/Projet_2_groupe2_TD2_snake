@@ -51,6 +51,7 @@ SPEED_GAME_CHOOSE = 0
 END = 1
 score = []
 compteur = []
+c = "vitesse : non-défini"
 
 
 #Defintions des fonctions :
@@ -148,34 +149,30 @@ def Avance_Serpent():
 
 def Fast():
     """Creation d'un bouton permettant de changer la vitesse en rapide"""
-    global SPEED_GAME_FAST
-    f = "vitesse : rapide"
-    message_vitesse.configure(text = f)
+    global SPEED_GAME_FAST, c
+    c = "vitesse : rapide"
     id_Game = canvas.after(SPEED_GAME_FAST)
 
 
 def Slow():
     """Creation d'un bouton permettant de changer la vitesse en lente"""
-    global SPEED_GAME_SLOW
-    s = "vitesse : lente"
-    message_vitesse.configure(text = s)
+    global SPEED_GAME_SLOW, c
+    c = "vitesse : lente"
     id_Game = canvas.after(SPEED_GAME_SLOW)
 
 
 def Medium():
     """Creation d'un bouton permettant de changer la vitesse en moyenne"""
-    global SPEED_GAME_MEDIUM
-    m = "vitesse : moyenne"
-    message_vitesse.configure(text = m)
+    global SPEED_GAME_MEDIUM, c
+    c = "vitesse : moyenne"
     id_Game = canvas.after(SPEED_GAME_MEDIUM)
 
 
 def Vitesse():
     """Creation d'un bouton permettant au joueur d'entrer une vitesse de son choix"""
-    global SPEED_GAME_CHOOSE
+    global SPEED_GAME_CHOOSE, c
     SPEED_GAME_CHOOSE = e1 * 1000
     c = "vitesse : choisie"
-    message_vitesse.configure(text = c)
     id_Game = canvas.after(SPEED_GAME_CHOOSE)
 
 def Echec():
@@ -263,9 +260,9 @@ def Speed():
     racine1.title("Choix vitesse")
     racine1.geometry("320x130")
     info = tk.Label(racine1, text="Choix du mode de vitesse", font=('arial', '15'))
-    buttonl = tk.Button(racine1, text='lent', font=('arial', '10'), command = Slow)
-    buttonm = tk.Button(racine1, text='moyen', font=('arial', '10'), command = Medium)
-    buttonr = tk.Button(racine1, text='rapide', font=('arial', '10'), command = Fast)
+    buttonl = tk.Button(racine1, text='lent', font=('arial', '10'), command = lambda: [Slow, racine1.destroy()])
+    buttonm = tk.Button(racine1, text='moyen', font=('arial', '10'), command = lambda: [Medium, racine1.destroy()])
+    buttonr = tk.Button(racine1, text='rapide', font=('arial', '10'), command = lambda: [Fast, racine1.destroy()])
     info2 = tk.Label(racine1, text="Ou choix de la période en seconde", font=('arial', '15'))
     e1 = tk.Entry(racine1)
 
@@ -293,7 +290,7 @@ racine.title("snake")
 canvas = tk.Canvas(width = WIDTH, height = HEIGHT)
 
 message_score = tk.Label(racine, text = "score : 0")
-message_vitesse = tk.Label(racine, text = "vitesse : lent")
+message_vitesse = tk.Label(racine, text = c)
 
 canvas.grid(column = 0, row = 1, columnspan = 2)
 message_score.grid(column = 0, row = 0)
