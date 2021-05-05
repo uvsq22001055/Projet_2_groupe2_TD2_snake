@@ -29,15 +29,13 @@ COULEUR_MUR = '#9e6d36'
 COULEUR_POMME = '#ad0017'
 COULEUR_SERPENT = '#014386'
 FOND = 0
-MUR = 1
-POMME = 2
-SERPENT = 3
+MUR = -2
+POMME = -1
 Avance = 4
 DROITE = 5
 GAUCHE = 6 
 BAS = 7
 HAUT = 8
-TETE = 9
 vitesseTest = 2000
 
 # Variables globales:
@@ -55,6 +53,7 @@ compteur = []
 c = "vitesse : non-défini"
 vitesse = 0
 racine1 = 0
+tete = 3
 
 #Defintions des fonctions :
 
@@ -62,7 +61,7 @@ def Generate_Pomme():
     """Génération de la pomme"""
     y = rd.randint(1, ROW-1)
     x = rd.randint(1, COL-1)
-    if etat[y][x] != SERPENT and etat[y][x] != MUR:
+    if etat[y][x] == FOND:
         etat[y][x] = POMME
         canvas.create_image(x*20+10, y*20+10,image=image_pomme)
     else:
@@ -71,12 +70,9 @@ def Generate_Pomme():
 
 def Generate_Serpent():
     """Génération du serpent"""
-    etat[15][15] = TETE
-    etat[15][14] = SERPENT
-    etat[15][13] = SERPENT
-    time[15][15] = 3
-    time[15][14] = 2
-    time[15][13] = 1
+    etat[15][15] = 3
+    etat[15][14] = 2
+    etat[15][13] = 1
 
 def base():
     for y in range(ROW):
@@ -97,30 +93,27 @@ def Generate_Decor():
     for y in range(ROW):
         for x in range(COL):
             if y == 0:
-                etat[y][x] = 1
+                etat[y][x] = MUR
             elif x == 0:
-                etat[y][x] = 1
+                etat[y][x] = MUR
             elif y == (ROW - 1):
-                etat[y][x] = 1
+                etat[y][x] = MUR
             elif x == (COL - 1):
-                etat[y][x] = 1
+                etat[y][x] = MUR
     
     
 def draw():
     for y in range(ROW):
         for x in range(COL):
-            if etat[y][x] == FOND:
+            if etat[x][y]>0:
+                coul = COULEUR_SERPENT
+                canvas.itemconfig(case[y][x], fill=coul)
+            elif etat[y][x] == FOND:
                 coul = COULEUR_FOND
                 canvas.itemconfig(case[y][x], fill=coul)
             elif etat[y][x] == MUR:
                 coul = COULEUR_MUR
-                canvas.create_image(x*20+10, y*20+10, image=image_mur)
-            elif etat[x][y] == SERPENT:
-                coul = COULEUR_SERPENT
-                canvas.itemconfig(case[y][x], fill=coul)
-            elif etat[x][y] == TETE:
-                coul = COULEUR_SERPENT
-                canvas.itemconfig(case[y][x], fill=coul)
+                canvas.create_image(x*20+10, y*20+10, image=image_mur)           
 
 
 def Avance_Serpent(): 
@@ -128,25 +121,31 @@ def Avance_Serpent():
         for x in range(1, len(etat)-1):
             for y in range(1, len(etat)-1):
                 if Avance == DROITE :
-                    if etat[x][y] == TETE :
-                        etat[x+1][y] = TETE
+                    if etat[x][y] == tete :
+                        etat[x+1][y] = tete
 
                 if Avance == GAUCHE :
-                    if etat[x][y] == TETE :
-                        etat[x-1][y] = TETE
+                    if etat[x][y] == tete :
+                        etat[x-1][y] = tete
 
                 if Avance == BAS :
-                    if etat[x][y] == TETE :
-                        etat[x][y+1] = TETE
+                    if etat[x][y] == tete :
+                        etat[x][y+1] = tete
 
                 if Avance == HAUT :
-                    if etat[x][y] == TETE :
-                        etat[x][y-1] = TETE
+                    if etat[x][y] == tete :
+                        etat[x][y-1] = tete
+
+                if etat[x][y]>0:
+                    etat[x][y] -= 1
             draw()
+    print(etat
+    
+    
+    )
     id_Avance_Serpent = canvas.after(vitesse, Avance_Serpent)
     if Echec == True :
         canvas.after_cancel(id_Avance_Serpent)
-    pass
 
 
 def Fast():
