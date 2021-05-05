@@ -140,7 +140,6 @@ def Avance_Serpent():
                     if etat[x][y] == TETE :
                         etat[x][y-1] = TETE
             draw()
-    print(etat)
     id_Avance_Serpent = canvas.after(vitesse, Avance_Serpent)
     if Echec == True :
         canvas.after_cancel(id_Avance_Serpent)
@@ -151,7 +150,7 @@ def Fast():
     """Creation d'un bouton permettant de changer la vitesse en rapide"""
     global SPEED_GAME_FAST, c, vitesse
     c = "vitesse : rapide"
-    vitesse = SPEED_GAME_FASTracine1.destroy()
+    vitesse = SPEED_GAME_FAST
     racine1.destroy()
 
 
