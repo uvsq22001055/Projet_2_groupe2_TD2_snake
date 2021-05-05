@@ -139,10 +139,7 @@ def Avance_Serpent():
                 if etat[x][y]>0:
                     etat[x][y] -= 1
             draw()
-    print(etat
-    
-    
-    )
+    print(etat)
     id_Avance_Serpent = canvas.after(vitesse, Avance_Serpent)
     if Echec == True :
         canvas.after_cancel(id_Avance_Serpent)
@@ -208,13 +205,11 @@ def Grandir_Serpent():
     pass
 
 
-def Start():
+def Start(event):
     """Appuyer sur un bouton ou une touche pour démarrer la simulation"""
     global END, SPEED_GAME_FAST, SPEED_GAME_MEDIUM, SPEED_GAME_SLOW, SPEED_GAME_CHOOSE
     Avance_Serpent()
-    id_Game = canvas.after(SPEED_GAME_SLOW or SPEED_GAME_FAST or SPEED_GAME_MEDIUM or SPEED_GAME_CHOOSE, Start)
-    if END == 0:
-        canvas.after_cancel(id_Game)
+    id_Game = canvas.after(vitesse, Start)
 
 
 def Pseudo():
@@ -319,6 +314,5 @@ photo_mur = Image.open("mur.png")
 image_mur = ImageTk.PhotoImage(photo_mur)
 
 base()
-Avance_Serpent()
 
 racine.mainloop()
