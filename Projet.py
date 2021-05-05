@@ -149,28 +149,28 @@ def Avance_Serpent():
 
 def Fast():
     """Creation d'un bouton permettant de changer la vitesse en rapide"""
-    global SPEED_GAME_FAST, c
+    global SPEED_GAME_FAST, c, vitesse
     c = "vitesse : rapide"
     vitesse = SPEED_GAME_FAST
 
 
 def Slow():
     """Creation d'un bouton permettant de changer la vitesse en lente"""
-    global SPEED_GAME_SLOW, c
+    global SPEED_GAME_SLOW, c, vitesse
     c = "vitesse : lente"
     vitesse = SPEED_GAME_SLOW
 
 
 def Medium():
     """Creation d'un bouton permettant de changer la vitesse en moyenne"""
-    global SPEED_GAME_MEDIUM, c
+    global SPEED_GAME_MEDIUM, c vitesse
     c = "vitesse : moyenne"
     vitesse = SPEED_GAME_MEDIUM
 
 
 def Vitesse():
     """Creation d'un bouton permettant au joueur d'entrer une vitesse de son choix"""
-    global SPEED_GAME_CHOOSE, c
+    global SPEED_GAME_CHOOSE, c vitesse
     SPEED_GAME_CHOOSE = e1 * 1000
     c = "vitesse : choisie"
     vitesse = SPEED_GAME_CHOOSE
