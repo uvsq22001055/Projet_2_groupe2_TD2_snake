@@ -44,6 +44,7 @@ vitesseTest = 2000
 
 case = [[0 for row in range(ROW)] for col in range(COL)]
 etat = [[FOND for row in range(ROW)] for col in range(COL)]
+time = [[0 for row in range(ROW)] for col in range(COL)]
 SPEED_GAME_SLOW = 2000
 SPEED_GAME_MEDIUM = 1000
 SPEED_GAME_FAST = 500
@@ -71,9 +72,11 @@ def Generate_Pomme():
 def Generate_Serpent():
     """Génération du serpent"""
     etat[15][15] = TETE
-    
-
-
+    etat[15][14] = SERPENT
+    etat[15][13] = SERPENT
+    time[15][15] = 3
+    time[15][14] = 2
+    time[15][13] = 1
 
 def base():
     for y in range(ROW):
@@ -261,8 +264,8 @@ def Avance_Bas(event):
 def Speed():
     global racine1
     racine1 = tk.Tk()
-    racine1.title("Choix vitesse")
     racine1.geometry("320x130")
+    racine1.title("Choix vitesse")
     info = tk.Label(racine1, text="Choix du mode de vitesse", font=('arial', '15'))
     buttonl = tk.Button(racine1, text='lent', font=('arial', '10'), command = Slow)
     buttonm = tk.Button(racine1, text='moyen', font=('arial', '10'), command = Medium)
