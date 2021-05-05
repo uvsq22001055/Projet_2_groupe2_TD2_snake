@@ -163,14 +163,14 @@ def Slow():
 
 def Medium():
     """Creation d'un bouton permettant de changer la vitesse en moyenne"""
-    global SPEED_GAME_MEDIUM, c ,vitesse
-    c = "vitesse : moyenne"
+    global SPEED_GAME_MEDIUM, c, vitesse
+    c = "vitesse : moyenne" 
     vitesse = SPEED_GAME_MEDIUM
 
 
 def Vitesse():
     """Creation d'un bouton permettant au joueur d'entrer une vitesse de son choix"""
-    global SPEED_GAME_CHOOSE, c vitesse
+    global SPEED_GAME_CHOOSE, c, vitesse
     SPEED_GAME_CHOOSE = e1 * 1000
     c = "vitesse : choisie"
     vitesse = SPEED_GAME_CHOOSE
