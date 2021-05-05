@@ -259,34 +259,37 @@ def Avance_Bas(event):
     Avance = BAS 
     pass
 
-
-def Speed():
-    global racine1
-    racine1 = tk.Tk()
-    racine1.geometry("320x130")
-    racine1.title("Choix vitesse")
-    info = tk.Label(racine1, text="Choix du mode de vitesse", font=('arial', '15'))
-    buttonl = tk.Button(racine1, text='lent', font=('arial', '10'), command = Slow)
-    buttonm = tk.Button(racine1, text='moyen', font=('arial', '10'), command = Medium)
-    buttonr = tk.Button(racine1, text='rapide', font=('arial', '10'), command = Fast)
-    info2 = tk.Label(racine1, text="Ou choix de la période en seconde", font=('arial', '15'))
-    e1 = tk.Entry(racine1)
-
-
-    info.grid(row=0, column=0, columnspan=5)
-    buttonl.grid(row=2, column=0)
-    buttonm.grid(row=2, column=2)
-    buttonr.grid(row=2, column=4)
-    info2.grid(row=3, column=0, columnspan=5)
-    e1.grid(row=4, column=2)
-
-    racine1.mainloop()
+def get_entry(event):
+    v = var.get()
+    print(v)
+    racine1.destroy()
 
 ################################## Programme principal#############################
 
 #1ere fenetre demande vitesse
-Speed()
+racine1 = tk.Tk()
+racine1.title("Choix vitesse")
+racine1.geometry("320x130")
 
+var = tk.StringVar()
+
+info = tk.Label(racine1, text="Choix du mode de vitesse", font=('arial', '15'))
+buttonl = tk.Button(racine1, text='lent', font=('arial', '10'))
+buttonm = tk.Button(racine1, text='moyen', font=('arial', '10'))
+buttonr = tk.Button(racine1, text='rapide', font=('arial', '10'))
+info2 = tk.Label(racine1, text="Ou choix de la période en seconde", font=('arial', '15'))
+e1 = tk.Entry(racine1, textvariable = var)
+racine1.bind('<Return>', get_entry)
+
+
+info.grid(row=0, column=0, columnspan=5)
+buttonl.grid(row=2, column=0)
+buttonm.grid(row=2, column=2)
+buttonr.grid(row=2, column=4)
+info2.grid(row=3, column=0, columnspan=5)
+e1.grid(row=4, column=2)
+
+racine1.mainloop()
 
 #2eme fenetre, fenetre principale
 racine = tk.Tk()
