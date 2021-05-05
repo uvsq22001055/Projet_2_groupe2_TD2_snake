@@ -23,7 +23,7 @@ import random as rd
 
 WIDTH, HEIGHT = 600, 600
 COTE = 20
-ROW, cOL = (HEIGHT // COTE), (WIDTH // COTE)
+ROW, COL = (HEIGHT // COTE), (WIDTH // COTE)
 COULEUR_FOND = '#3bbf3e'
 COULEUR_MUR = '#9e6d36'
 COULEUR_POMME = '#ad0017'
@@ -53,14 +53,14 @@ score = []
 compteur = []
 c = "vitesse : non-défini"
 vitesse = 0
-
+racine1 = 0
 
 #Defintions des fonctions :
 
 def Generate_Pomme():
     """Génération de la pomme"""
     y = rd.randint(1, ROW-1)
-    x = rd.randint(1, cOL-1)
+    x = rd.randint(1, COL-1)
     if etat[y][x] != SERPENT and etat[y][x] != MUR:
         etat[y][x] = POMME
         canvas.create_image(x*20+10, y*20+10,image=image_pomme)
@@ -151,7 +151,8 @@ def Fast():
     """Creation d'un bouton permettant de changer la vitesse en rapide"""
     global SPEED_GAME_FAST, c, vitesse
     c = "vitesse : rapide"
-    vitesse = SPEED_GAME_FAST
+    vitesse = SPEED_GAME_FASTracine1.destroy()
+    racine1.destroy()
 
 
 def Slow():
@@ -159,6 +160,7 @@ def Slow():
     global SPEED_GAME_SLOW, c, vitesse
     c = "vitesse : lente"
     vitesse = SPEED_GAME_SLOW
+    racine1.destroy()
 
 
 def Medium():
@@ -166,6 +168,7 @@ def Medium():
     global SPEED_GAME_MEDIUM, c, vitesse
     c = "vitesse : moyenne" 
     vitesse = SPEED_GAME_MEDIUM
+    racine1.destroy()
 
 
 def Vitesse():
@@ -174,6 +177,7 @@ def Vitesse():
     SPEED_GAME_CHOOSE = e1 * 1000
     c = "vitesse : choisie"
     vitesse = SPEED_GAME_CHOOSE
+    racine1.destroy()
 
 def Echec():
     """Si le serpent rentre dans un mur ou dans sa propre queue la partie est perdue"""
@@ -256,6 +260,7 @@ def Avance_Bas(event):
 
 
 def Speed():
+    global racine1
     racine1 = tk.Tk()
     racine1.title("Choix vitesse")
     racine1.geometry("320x130")
