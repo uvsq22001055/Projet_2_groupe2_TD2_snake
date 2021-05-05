@@ -23,7 +23,7 @@ import random as rd
 
 WIDTH, HEIGHT = 600, 600
 COTE = 20
-ROW, COL = (HEIGHT // COTE), (WIDTH // COTE)
+ROW, cOL = (HEIGHT // COTE), (WIDTH // COTE)
 COULEUR_FOND = '#3bbf3e'
 COULEUR_MUR = '#9e6d36'
 COULEUR_POMME = '#ad0017'
@@ -52,6 +52,7 @@ END = 1
 score = []
 compteur = []
 c = "vitesse : non-défini"
+vitesse = 0
 
 
 #Defintions des fonctions :
@@ -59,7 +60,7 @@ c = "vitesse : non-défini"
 def Generate_Pomme():
     """Génération de la pomme"""
     y = rd.randint(1, ROW-1)
-    x = rd.randint(1, COL-1)
+    x = rd.randint(1, cOL-1)
     if etat[y][x] != SERPENT and etat[y][x] != MUR:
         etat[y][x] = POMME
         canvas.create_image(x*20+10, y*20+10,image=image_pomme)
@@ -140,32 +141,31 @@ def Avance_Serpent():
                         etat[x][y-1] = TETE
             draw()
     print(etat)
-    id_Avance_Serpent = canvas.after(1000, Avance_Serpent)
+    id_Avance_Serpent = canvas.after(vitesse, Avance_Serpent)
     if Echec == True :
         canvas.after_cancel(id_Avance_Serpent)
     pass
 
-    
 
 def Fast():
     """Creation d'un bouton permettant de changer la vitesse en rapide"""
     global SPEED_GAME_FAST, c
     c = "vitesse : rapide"
-    id_Game = canvas.after(SPEED_GAME_FAST)
+    vitesse = SPEED_GAME_FAST
 
 
 def Slow():
     """Creation d'un bouton permettant de changer la vitesse en lente"""
     global SPEED_GAME_SLOW, c
     c = "vitesse : lente"
-    id_Game = canvas.after(SPEED_GAME_SLOW)
+    vitesse = SPEED_GAME_SLOW
 
 
 def Medium():
     """Creation d'un bouton permettant de changer la vitesse en moyenne"""
     global SPEED_GAME_MEDIUM, c
     c = "vitesse : moyenne"
-    id_Game = canvas.after(SPEED_GAME_MEDIUM)
+    vitesse = SPEED_GAME_MEDIUM
 
 
 def Vitesse():
@@ -173,7 +173,7 @@ def Vitesse():
     global SPEED_GAME_CHOOSE, c
     SPEED_GAME_CHOOSE = e1 * 1000
     c = "vitesse : choisie"
-    id_Game = canvas.after(SPEED_GAME_CHOOSE)
+    vitesse = SPEED_GAME_CHOOSE
 
 def Echec():
     """Si le serpent rentre dans un mur ou dans sa propre queue la partie est perdue"""
@@ -260,9 +260,9 @@ def Speed():
     racine1.title("Choix vitesse")
     racine1.geometry("320x130")
     info = tk.Label(racine1, text="Choix du mode de vitesse", font=('arial', '15'))
-    buttonl = tk.Button(racine1, text='lent', font=('arial', '10'), command = lambda: [Slow, racine1.destroy()])
-    buttonm = tk.Button(racine1, text='moyen', font=('arial', '10'), command = lambda: [Medium, racine1.destroy()])
-    buttonr = tk.Button(racine1, text='rapide', font=('arial', '10'), command = lambda: [Fast, racine1.destroy()])
+    buttonl = tk.Button(racine1, text='lent', font=('arial', '10'), command = Slow)
+    buttonm = tk.Button(racine1, text='moyen', font=('arial', '10'), command = Medium)
+    buttonr = tk.Button(racine1, text='rapide', font=('arial', '10'), command = Fast)
     info2 = tk.Label(racine1, text="Ou choix de la période en seconde", font=('arial', '15'))
     e1 = tk.Entry(racine1)
 
