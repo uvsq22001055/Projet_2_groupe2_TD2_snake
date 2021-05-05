@@ -54,6 +54,7 @@ c = "vitesse : non-défini"
 vitesse = 0
 racine1 = 0
 tete = 3
+vitesse_entree = 2
 
 #Defintions des fonctions :
 
@@ -172,10 +173,11 @@ def Medium():
 def Vitesse():
     """Creation d'un bouton permettant au joueur d'entrer une vitesse de son choix"""
     global SPEED_GAME_CHOOSE, c, vitesse
-    SPEED_GAME_CHOOSE = e1 * 1000
-    c = "vitesse : choisie"
+    SPEED_GAME_CHOOSE = int(vitesse_entree) * 1000
+    c = "vitesse : " + str(vitesse_entree) + " s"
     vitesse = SPEED_GAME_CHOOSE
     racine1.destroy()
+
 
 def Echec():
     """Si le serpent rentre dans un mur ou dans sa propre queue la partie est perdue"""
@@ -197,12 +199,10 @@ def Echec():
                 if etat[x][y-1] == MUR :
                     Echec = True
     canvas.after(vitesseTest, Echec)
-    pass
 
 
 def Grandir_Serpent():
     """Quand le serpent mange une pomme il grandit d'une unité"""
-    pass
 
 
 def Start(event):
@@ -214,7 +214,6 @@ def Start(event):
 
 def Pseudo():
     """A chaque début de partie le joueur doit rentrer un pseudo"""
-    pass
 
 
 def Score():
@@ -234,30 +233,26 @@ def Score_texte():
 def Avance_Gauche(event):
     global Avance 
     Avance = GAUCHE
-    pass
 
 
 def Avance_Droite(event):
     global Avance
     Avance = DROITE
-    pass
-
 
 def Avance_Haut(event):
     global Avance
     Avance = HAUT
-    pass
 
 
 def Avance_Bas(event):
     global Avance
     Avance = BAS 
-    pass
 
 def get_entry(event):
-    v = var.get()
-    print(v)
-    racine1.destroy()
+    global vitesse_entree
+    vitesse_entree = var.get()
+    Vitesse()
+
 
 ################################## Programme principal#############################
 
