@@ -53,6 +53,7 @@ c = "vitesse : non-défini"
 vitesse = 0
 racine1 = 0
 tete = 3
+transfo = -tete
 vitesse_entree = 2
 Avance = HAUT
 echec = False
@@ -89,8 +90,6 @@ def base():
     Generate_Serpent()
     Generate_Pomme()
     draw()
-    time = list(etat)
-    print(time)
                 
 
 def Generate_Decor():
@@ -110,7 +109,11 @@ def Generate_Decor():
 def draw():
     for y in range(ROW):
         for x in range(COL):
-            if etat[x][y]>0:
+            if etat[x][y] == transfo:
+                coul = COULEUR_SERPENT
+                canvas.itemconfig(case[y][x], fill=coul)
+                etat[x][y] = tete
+            elif etat[x][y]>0:
                 coul = COULEUR_SERPENT
                 canvas.itemconfig(case[y][x], fill=coul)
             elif etat[y][x] == FOND:
@@ -127,19 +130,19 @@ def Avance_Serpent():
         for y in range(1, COL-1):
             if etat[x][y] == tete:  
                 if Avance == DROITE :
-                        time[x+1][y] = tete
-                        time[x][y] -= 1
+                        etat[x+1][y] = transfo
+                        etat[x][y] -= 1
                 elif Avance == GAUCHE :
-                        time[x-1][y] = tete
-                        time[x][y] -= 1
+                        etat[x-1][y] = transfo
+                        etat[x][y] -= 1
                 elif Avance == BAS :
-                        time[x][y+1] = tete
-                        time[x][y] -= 1
+                        etat[x][y+1] = transfo
+                        etat[x][y] -= 1
                 elif Avance == HAUT :
-                        time[x][y-1] = tete
-                        
-            if etat[x][y] > 0 and etat[x][y] < tete:
-                time[x][y] -= 1
+                        etat[x][y-1] = transfo
+                        etat[x][y] -= 1
+            if etat[x][y] > 0 and etat[x][y] != tete:
+                etat[x][y] -= 1
     for x in range(1, len(etat)-1):
         for y in range(1, len(etat)-1):
             if Avance == DROITE :
@@ -154,7 +157,6 @@ def Avance_Serpent():
             if Avance == HAUT :
                 if etat[x][y] == tete and etat[x][y-1] == MUR :
                     echec = True
-    etat = list(time)
     print(etat)
 
 
