@@ -80,13 +80,15 @@ def MangerPomme():
                     etat[x+1][y] = FOND
                     Generate_Pomme()
                 elif Avance == GAUCHE and etat[x-1][y] == POMME:
-                    etat[x-1][y]
+                    etat[x-1][y] = FOND
                     tete += 1
                     Generate_Pomme()
                 elif Avance == BAS and etat[x][y+1] == POMME:
+                    etat[x][y+1] = FOND
                     tete += 1
                     Generate_Pomme()
                 elif Avance == HAUT and etat[x][y-1] == POMME:
+                    etat[x][y-1] = FOND
                     tete += 1
                     Generate_Pomme()
 
@@ -175,6 +177,7 @@ def Avance_Serpent():
             if Avance == HAUT:
                 if etat[x][y] == transfo and etat[x][y-1] == MUR :
                     echec = True
+    print(etat)
 
 
 def Echec():
@@ -220,9 +223,9 @@ def Medium():
 def Vitesse():
     """Creation d'un bouton permettant au joueur d'entrer une vitesse de son choix"""
     global SPEED_GAME_CHOOSE, c, vitesse
-    SPEED_GAME_CHOOSE = int(vitesse_entree) * 1000
+    SPEED_GAME_CHOOSE = float(vitesse_entree) * 1000
     c = "vitesse : " + str(vitesse_entree) + " s"
-    vitesse = SPEED_GAME_CHOOSE
+    vitesse = int(SPEED_GAME_CHOOSE)
     racine1.destroy()
 
 
