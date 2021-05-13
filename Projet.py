@@ -66,9 +66,27 @@ def Generate_Pomme():
     x = rd.randint(1, COL-1)
     if etat[y][x] == FOND:
         etat[y][x] = POMME
-        canvas.create_image(x*20+10, y*20+10,image= image_pomme)
     else:
         Generate_Pomme()
+
+
+def MangerPomme():
+    global tete
+    for x in range(1, ROW-1):
+        for y in range(1, COL-1):
+            if etat[x][y] == tete:  
+                if Avance == DROITE and etat[x+1][y] == POMME:
+                        tete += 1
+                        Generate_Pomme()
+                elif Avance == GAUCHE and etat[x-1][y] == POMME:
+                        tete += 1
+                        Generate_Pomme()
+                elif Avance == BAS and etat[x][y+1] == POMME:
+                        tete += 1
+                        Generate_Pomme()
+                elif Avance == HAUT and etat[x][y-1] == POMME:
+                        tete += 1
+                        Generate_Pomme()
 
 
 def Generate_Serpent():
@@ -113,9 +131,11 @@ def draw():
                 coul = COULEUR_SERPENT
                 canvas.itemconfig(case[y][x], fill=coul)
                 etat[x][y] = tete
-            elif etat[x][y]>0:
+            elif etat[x][y] > 0:
                 coul = COULEUR_SERPENT
                 canvas.itemconfig(case[y][x], fill=coul)
+            elif etat[x][y] == POMME:
+                canvas.create_image(x*20+10, y*20+10,image= image_pomme)
             elif etat[y][x] == FOND:
                 coul = COULEUR_FOND
                 canvas.itemconfig(case[y][x], fill=coul)
@@ -125,36 +145,32 @@ def draw():
 
 
 def Avance_Serpent():
-    global echec, etat
+    global echec
     for x in range(1, ROW-1):
         for y in range(1, COL-1):
             if etat[x][y] == tete:  
-                if Avance == DROITE :
+                if Avance == DROITE:
                         etat[x+1][y] = transfo
-                        etat[x][y] -= 1
-                elif Avance == GAUCHE :
+                elif Avance == GAUCHE:
                         etat[x-1][y] = transfo
-                        etat[x][y] -= 1
-                elif Avance == BAS :
+                elif Avance == BAS:
                         etat[x][y+1] = transfo
-                        etat[x][y] -= 1
-                elif Avance == HAUT :
+                elif Avance == HAUT:
                         etat[x][y-1] = transfo
-                        etat[x][y] -= 1
-            if etat[x][y] > 0 and etat[x][y] != tete:
+            if etat[x][y] > 0:
                 etat[x][y] -= 1
     for x in range(1, len(etat)-1):
         for y in range(1, len(etat)-1):
-            if Avance == DROITE :
+            if Avance == DROITE:
                 if etat[x][y] == tete and etat[x+1][y] == MUR:
                     echec = True
-            if Avance == GAUCHE :
+            if Avance == GAUCHE:
                 if etat[x][y] == tete and etat[x-1][y] == MUR :
                     echec = True
-            if Avance == BAS :
+            if Avance == BAS:
                 if etat[x][y] == tete and etat[x][y+1] == MUR :
                     echec = True
-            if Avance == HAUT :
+            if Avance == HAUT:
                 if etat[x][y] == tete and etat[x][y-1] == MUR :
                     echec = True
     print(etat)
@@ -166,6 +182,7 @@ def Echec():
     Avance = HAUT
     if echec == False:
         Avance_Serpent()
+        MangerPomme()
         draw()
     elif echec == True:
         canvas.after_cancel(id_time)
