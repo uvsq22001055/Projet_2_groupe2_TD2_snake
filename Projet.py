@@ -89,6 +89,8 @@ def base():
     Generate_Serpent()
     Generate_Pomme()
     draw()
+    time = list(etat)
+    print(time)
                 
 
 def Generate_Decor():
@@ -120,24 +122,24 @@ def draw():
 
 
 def Avance_Serpent():
-    global echec
-    for x in range(1, len(etat)-1):
-        for y in range(1, len(etat)-1):
+    global echec, etat
+    for x in range(1, ROW-1):
+        for y in range(1, COL-1):
             if etat[x][y] == tete:  
                 if Avance == DROITE :
-                        etat[x+1][y] = tete
-                        etat[x][y] -= 1
+                        time[x+1][y] = tete
+                        time[x][y] -= 1
                 elif Avance == GAUCHE :
-                        etat[x-1][y] = tete
-                        etat[x][y] -= 1
+                        time[x-1][y] = tete
+                        time[x][y] -= 1
                 elif Avance == BAS :
-                        etat[x][y+1] = tete
-                        etat[x][y] -= 1
+                        time[x][y+1] = tete
+                        time[x][y] -= 1
                 elif Avance == HAUT :
-                        etat[x][y-1] = tete
-                        etat[x][y] -= 1
+                        time[x][y-1] = tete
+                        
             if etat[x][y] > 0 and etat[x][y] < tete:
-                etat[x][y] -= 1
+                time[x][y] -= 1
     for x in range(1, len(etat)-1):
         for y in range(1, len(etat)-1):
             if Avance == DROITE :
@@ -152,6 +154,7 @@ def Avance_Serpent():
             if Avance == HAUT :
                 if etat[x][y] == tete and etat[x][y-1] == MUR :
                     echec = True
+    etat = list(time)
     print(etat)
 
 
@@ -159,8 +162,6 @@ def Echec():
     global echec, vitesse
     id_time = canvas.after(vitesse, Echec)
     Avance = HAUT
-    print(echec)
-    print(Avance)
     if echec == False:
         Avance_Serpent()
         draw()
