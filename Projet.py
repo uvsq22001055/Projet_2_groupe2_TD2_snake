@@ -53,6 +53,7 @@ c = "vitesse : non-défini"
 vitesse = 0
 racine1 = 0
 tete = 3
+transfo = -tete
 vitesse_entree = 2
 Avance = HAUT
 echec = False
@@ -65,9 +66,29 @@ def Generate_Pomme():
     x = rd.randint(1, COL-1)
     if etat[y][x] == FOND:
         etat[y][x] = POMME
-        canvas.create_image(x*20+10, y*20+10,image= image_pomme)
     else:
         Generate_Pomme()
+
+
+def MangerPomme():
+    global tete
+    for x in range(1, ROW-1):
+        for y in range(1, COL-1):
+            if etat[x][y] == tete:  
+                if Avance == DROITE and etat[x+1][y] == POMME:
+                    tete += 1
+                    etat[x+1][y] = FOND
+                    Generate_Pomme()
+                elif Avance == GAUCHE and etat[x-1][y] == POMME:
+                    etat[x-1][y]
+                    tete += 1
+                    Generate_Pomme()
+                elif Avance == BAS and etat[x][y+1] == POMME:
+                    tete += 1
+                    Generate_Pomme()
+                elif Avance == HAUT and etat[x][y-1] == POMME:
+                    tete += 1
+                    Generate_Pomme()
 
 
 def Generate_Serpent():
@@ -108,9 +129,15 @@ def Generate_Decor():
 def draw():
     for y in range(ROW):
         for x in range(COL):
-            if etat[x][y]>0:
+            if etat[x][y] == transfo:
                 coul = COULEUR_SERPENT
                 canvas.itemconfig(case[y][x], fill=coul)
+                etat[x][y] = tete
+            elif etat[x][y] > 0:
+                coul = COULEUR_SERPENT
+                canvas.itemconfig(case[y][x], fill=coul)
+            elif etat[x][y] == POMME:
+                canvas.create_image(x*20+10, y*20+10,image= image_pomme)
             elif etat[y][x] == FOND:
                 coul = COULEUR_FOND
                 canvas.itemconfig(case[y][x], fill=coul)
@@ -121,48 +148,42 @@ def draw():
 
 def Avance_Serpent():
     global echec
-    for x in range(1, len(etat)-1):
-        for y in range(1, len(etat)-1):
+    for x in range(1, ROW-1):
+        for y in range(1, COL-1):
             if etat[x][y] == tete:  
-                if Avance == DROITE :
-                        etat[x+1][y] = tete
-                        etat[x][y] -= 1
-                elif Avance == GAUCHE :
-                        etat[x-1][y] = tete
-                        etat[x][y] -= 1
-                elif Avance == BAS :
-                        etat[x][y+1] = tete
-                        etat[x][y] -= 1
-                elif Avance == HAUT :
-                        etat[x][y-1] = tete
-                        etat[x][y] -= 1
-            if etat[x][y] > 0 and etat[x][y] < tete:
+                if Avance == DROITE:
+                        etat[x+1][y] = transfo
+                elif Avance == GAUCHE:
+                        etat[x-1][y] = transfo
+                elif Avance == BAS:
+                        etat[x][y+1] = transfo
+                elif Avance == HAUT:
+                        etat[x][y-1] = transfo
+            if etat[x][y] > 0:
                 etat[x][y] -= 1
     for x in range(1, len(etat)-1):
         for y in range(1, len(etat)-1):
-            if Avance == DROITE :
-                if etat[x][y] == tete and etat[x+1][y] == MUR:
+            if Avance == DROITE:
+                if etat[x][y] == transfo and etat[x+1][y] == MUR:
                     echec = True
-            if Avance == GAUCHE :
-                if etat[x][y] == tete and etat[x-1][y] == MUR :
+            if Avance == GAUCHE:
+                if etat[x][y] == transfo and etat[x-1][y] == MUR :
                     echec = True
-            if Avance == BAS :
-                if etat[x][y] == tete and etat[x][y+1] == MUR :
+            if Avance == BAS:
+                if etat[x][y] == transfo and etat[x][y+1] == MUR :
                     echec = True
-            if Avance == HAUT :
-                if etat[x][y] == tete and etat[x][y-1] == MUR :
+            if Avance == HAUT:
+                if etat[x][y] == transfo and etat[x][y-1] == MUR :
                     echec = True
-    print(etat)
 
 
 def Echec():
     global echec, vitesse
     id_time = canvas.after(vitesse, Echec)
     Avance = HAUT
-    print(echec)
-    print(Avance)
     if echec == False:
         Avance_Serpent()
+        MangerPomme()
         draw()
     elif echec == True:
         canvas.after_cancel(id_time)
