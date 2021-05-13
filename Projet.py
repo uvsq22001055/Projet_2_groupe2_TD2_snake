@@ -31,7 +31,6 @@ COULEUR_SERPENT = '#014386'
 FOND = 0
 MUR = -2
 POMME = -1
-Avance = 4
 DROITE = 5
 GAUCHE = 6 
 BAS = 7
@@ -55,6 +54,8 @@ vitesse = 0
 racine1 = 0
 tete = 3
 vitesse_entree = 2
+Avance = HAUT
+echec = False
 
 #Defintions des fonctions :
 
@@ -64,7 +65,7 @@ def Generate_Pomme():
     x = rd.randint(1, COL-1)
     if etat[y][x] == FOND:
         etat[y][x] = POMME
-        canvas.create_image(x*20+10, y*20+10,image=image_pomme)
+        canvas.create_image(x*20+10, y*20+10,image= image_pomme)
     else:
         Generate_Pomme()
 
@@ -74,6 +75,7 @@ def Generate_Serpent():
     etat[15][15] = 3
     etat[15][14] = 2
     etat[15][13] = 1
+
 
 def base():
     for y in range(ROW):
@@ -117,33 +119,57 @@ def draw():
                 canvas.create_image(x*20+10, y*20+10, image=image_mur)           
 
 
-def Avance_Serpent(): 
-    while Echec == False :
-        for x in range(1, len(etat)-1):
-            for y in range(1, len(etat)-1):
+def Avance_Serpent():
+    global echec
+    for x in range(1, len(etat)-1):
+        for y in range(1, len(etat)-1):
+            if etat[x][y] == tete:  
                 if Avance == DROITE :
-                    if etat[x][y] == tete :
                         etat[x+1][y] = tete
-
-                if Avance == GAUCHE :
-                    if etat[x][y] == tete :
+                        etat[x][y] -= 1
+                elif Avance == GAUCHE :
                         etat[x-1][y] = tete
-
-                if Avance == BAS :
-                    if etat[x][y] == tete :
+                        etat[x][y] -= 1
+                elif Avance == BAS :
                         etat[x][y+1] = tete
-
-                if Avance == HAUT :
-                    if etat[x][y] == tete :
+                        etat[x][y] -= 1
+                elif Avance == HAUT :
                         etat[x][y-1] = tete
-
-                if etat[x][y]>0:
-                    etat[x][y] -= 1
-            draw()
+                        etat[x][y] -= 1
+            if etat[x][y] > 0 and etat[x][y] < tete:
+                etat[x][y] -= 1
+    for x in range(1, len(etat)-1):
+        for y in range(1, len(etat)-1):
+            if Avance == DROITE :
+                if etat[x][y] == tete and etat[x+1][y] == MUR:
+                    echec = True
+            if Avance == GAUCHE :
+                if etat[x][y] == tete and etat[x-1][y] == MUR :
+                    echec = True
+            if Avance == BAS :
+                if etat[x][y] == tete and etat[x][y+1] == MUR :
+                    echec = True
+            if Avance == HAUT :
+                if etat[x][y] == tete and etat[x][y-1] == MUR :
+                    echec = True
     print(etat)
-    id_Avance_Serpent = canvas.after(vitesse, Avance_Serpent)
-    if Echec == True :
-        canvas.after_cancel(id_Avance_Serpent)
+
+
+def Echec():
+    global echec, vitesse
+    id_time = canvas.after(vitesse, Echec)
+    Avance = HAUT
+    print(echec)
+    print(Avance)
+    if echec == False:
+        Avance_Serpent()
+        draw()
+    elif echec == True:
+        canvas.after_cancel(id_time)
+
+
+def Start(event):
+    Echec()
 
 
 def Fast():
@@ -157,7 +183,7 @@ def Fast():
 def Slow():
     """Creation d'un bouton permettant de changer la vitesse en lente"""
     global SPEED_GAME_SLOW, c, vitesse
-    c = "vitesse : lente"
+    c = "vitesse : lent"
     vitesse = SPEED_GAME_SLOW
     racine1.destroy()
 
@@ -165,7 +191,7 @@ def Slow():
 def Medium():
     """Creation d'un bouton permettant de changer la vitesse en moyenne"""
     global SPEED_GAME_MEDIUM, c, vitesse
-    c = "vitesse : moyenne" 
+    c = "vitesse : moyen" 
     vitesse = SPEED_GAME_MEDIUM
     racine1.destroy()
 
@@ -179,37 +205,8 @@ def Vitesse():
     racine1.destroy()
 
 
-def Echec():
-    """Si le serpent rentre dans un mur ou dans sa propre queue la partie est perdue"""
-    global Echec
-    Echec = False
-
-    for x in range(1, len(etat)):
-        for y in range(1, len(etat)):
-            if Avance == DROITE :
-                if etat[x+1][y] == MUR :
-                    Echec = True
-            if Avance == GAUCHE :
-                if etat[x-1][y] == MUR :
-                    Echec = True
-            if Avance == BAS :
-                if etat[x][y+1] == MUR :
-                    Echec = True
-            if Avance == HAUT :
-                if etat[x][y-1] == MUR :
-                    Echec = True
-    canvas.after(vitesseTest, Echec)
-
-
 def Grandir_Serpent():
     """Quand le serpent mange une pomme il grandit d'une unité"""
-
-
-def Start(event):
-    """Appuyer sur un bouton ou une touche pour démarrer la simulation"""
-    global END, SPEED_GAME_FAST, SPEED_GAME_MEDIUM, SPEED_GAME_SLOW, SPEED_GAME_CHOOSE
-    Avance_Serpent()
-    id_Game = canvas.after(vitesse, Start)
 
 
 def Pseudo():
@@ -239,6 +236,7 @@ def Avance_Droite(event):
     global Avance
     Avance = DROITE
 
+
 def Avance_Haut(event):
     global Avance
     Avance = HAUT
@@ -264,9 +262,9 @@ racine1.geometry("320x130")
 var = tk.StringVar()
 
 info = tk.Label(racine1, text="Choix du mode de vitesse", font=('arial', '15'))
-buttonl = tk.Button(racine1, text='lent', font=('arial', '10'))
-buttonm = tk.Button(racine1, text='moyen', font=('arial', '10'))
-buttonr = tk.Button(racine1, text='rapide', font=('arial', '10'))
+buttonl = tk.Button(racine1, text='lent', font=('arial', '10'), command= Slow)
+buttonm = tk.Button(racine1, text='moyen', font=('arial', '10'), command= Medium)
+buttonr = tk.Button(racine1, text='rapide', font=('arial', '10'), command= Fast)
 info2 = tk.Label(racine1, text="Ou choix de la période en seconde", font=('arial', '15'))
 e1 = tk.Entry(racine1, textvariable = var)
 racine1.bind('<Return>', get_entry)
