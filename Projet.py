@@ -76,17 +76,19 @@ def MangerPomme():
         for y in range(1, COL-1):
             if etat[x][y] == tete:  
                 if Avance == DROITE and etat[x+1][y] == POMME:
-                        tete += 1
-                        Generate_Pomme()
+                    tete += 1
+                    etat[x+1][y] = FOND
+                    Generate_Pomme()
                 elif Avance == GAUCHE and etat[x-1][y] == POMME:
-                        tete += 1
-                        Generate_Pomme()
+                    etat[x-1][y]
+                    tete += 1
+                    Generate_Pomme()
                 elif Avance == BAS and etat[x][y+1] == POMME:
-                        tete += 1
-                        Generate_Pomme()
+                    tete += 1
+                    Generate_Pomme()
                 elif Avance == HAUT and etat[x][y-1] == POMME:
-                        tete += 1
-                        Generate_Pomme()
+                    tete += 1
+                    Generate_Pomme()
 
 
 def Generate_Serpent():
@@ -162,18 +164,17 @@ def Avance_Serpent():
     for x in range(1, len(etat)-1):
         for y in range(1, len(etat)-1):
             if Avance == DROITE:
-                if etat[x][y] == tete and etat[x+1][y] == MUR:
+                if etat[x][y] == transfo and etat[x+1][y] == MUR:
                     echec = True
             if Avance == GAUCHE:
-                if etat[x][y] == tete and etat[x-1][y] == MUR :
+                if etat[x][y] == transfo and etat[x-1][y] == MUR :
                     echec = True
             if Avance == BAS:
-                if etat[x][y] == tete and etat[x][y+1] == MUR :
+                if etat[x][y] == transfo and etat[x][y+1] == MUR :
                     echec = True
             if Avance == HAUT:
-                if etat[x][y] == tete and etat[x][y-1] == MUR :
+                if etat[x][y] == transfo and etat[x][y-1] == MUR :
                     echec = True
-    print(etat)
 
 
 def Echec():
