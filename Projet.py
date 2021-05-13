@@ -74,13 +74,11 @@ def MangerPomme():
     global tete
     for x in range(1, ROW-1):
         for y in range(1, COL-1):
-            if etat[x][y] == tete:  
+            if etat[x][y] == transfo:  
                 if Avance == DROITE and etat[x+1][y] == POMME:
                     tete += 1
-                    etat[x+1][y] = FOND
                     Generate_Pomme()
                 elif Avance == GAUCHE and etat[x-1][y] == POMME:
-                    etat[x-1][y] = FOND
                     tete += 1
                     Generate_Pomme()
                 elif Avance == BAS and etat[x][y+1] == POMME:
@@ -112,7 +110,7 @@ def base():
     Generate_Serpent()
     Generate_Pomme()
     draw()
-                
+
 
 def Generate_Decor():
     """génération mur"""
@@ -127,7 +125,7 @@ def Generate_Decor():
             elif x == (COL - 1):
                 etat[y][x] = MUR
     
-    
+
 def draw():
     for y in range(ROW):
         for x in range(COL):
@@ -163,33 +161,37 @@ def Avance_Serpent():
                         etat[x][y-1] = transfo
             if etat[x][y] > 0:
                 etat[x][y] -= 1
-    for x in range(1, len(etat)-1):
-        for y in range(1, len(etat)-1):
+    Generate_Decor()
+    for x in range(1, ROW-1):
+        for y in range(1, COL-1):
             if Avance == DROITE:
-                if etat[x][y] == transfo and etat[x+1][y] == MUR:
+                if etat[x][y] == (tete -1) and etat[x+1][y] == MUR:
                     echec = True
             if Avance == GAUCHE:
-                if etat[x][y] == transfo and etat[x-1][y] == MUR :
+                if etat[x][y] == (tete -1) and etat[x-1][y] == MUR :
                     echec = True
             if Avance == BAS:
-                if etat[x][y] == transfo and etat[x][y+1] == MUR :
+                if etat[x][y] == (tete -1) and etat[x][y+1] == MUR :
                     echec = True
             if Avance == HAUT:
-                if etat[x][y] == transfo and etat[x][y-1] == MUR :
+                if etat[x][y] == (tete -1) and etat[x][y-1] == MUR :
                     echec = True
     print(etat)
-
+    
 
 def Echec():
     global echec, vitesse
     id_time = canvas.after(vitesse, Echec)
     Avance = HAUT
     if echec == False:
+        print(Avance)
+        print(echec)
         Avance_Serpent()
         MangerPomme()
         draw()
     elif echec == True:
         canvas.after_cancel(id_time)
+        print("ok")
 
 
 def Start(event):
