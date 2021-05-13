@@ -89,7 +89,6 @@ def MangerPomme():
                     Generate_Pomme()
 
 
-
 def Generate_Serpent():
     """Génération du serpent"""
     etat[15][15] = 3
