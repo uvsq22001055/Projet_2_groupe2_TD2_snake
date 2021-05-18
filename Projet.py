@@ -147,21 +147,46 @@ def draw():
                 canvas.itemconfig(case[y][x], fill=coul)
             elif etat[y][x] == MUR:
                 coul = COULEUR_MUR
-                canvas.create_image(x*20+10, y*20+10, image=image_mur)           
+                canvas.create_image(x*20+10, y*20+10, image=image_mur)
+            Score_modifie()           
 
 
 def Avance_Serpent():
-    global echec
+    global echec, tete
     for x in range(1, ROW-1):
         for y in range(1, COL-1):
             if etat[x][y] == tete:  
                 if Avance == DROITE:
+                    if etat[x+1][y] != POMME :
+                        etat[x+1][y] = transfo
+                    else :
+                        tete += 1
+                        Generate_Pomme()
+                        score[0] +=1
                         etat[x+1][y] = transfo
                 elif Avance == GAUCHE:
+                    if etat[x-1][y] != POMME :
+                        etat[x-1][y] = transfo
+                    else :
+                        tete += 1
+                        Generate_Pomme()
+                        score[0] +=1
                         etat[x-1][y] = transfo
                 elif Avance == BAS:
+                    if etat[x][y+1] != POMME :
+                        etat[x][y+1] = transfo
+                    else :
+                        tete += 1
+                        Generate_Pomme()
+                        score[0] +=1
                         etat[x][y+1] = transfo
                 elif Avance == HAUT:
+                    if etat[x][y-1] != POMME :
+                        etat[x][y-1] = transfo
+                    else :
+                        tete += 1
+                        Generate_Pomme()
+                        score[0] +=1
                         etat[x][y-1] = transfo
             if etat[x][y] > 0:
                 etat[x][y] -= 1
@@ -191,7 +216,7 @@ def Echec():
         print(Avance)
         print(echec)
         Avance_Serpent()
-        MangerPomme()
+        """MangerPomme()"""
         draw()
     elif echec == True:
         canvas.after_cancel(id_time)
@@ -252,6 +277,11 @@ def Score_texte():
     f = open('score.txt', 'w')
     f.write(Pseudo, score[0])
     f.close()
+
+
+def Score_modifie():
+    b = "score : ", str(score[0])
+    message_score.configure(text = b)
 
 def Avance_Gauche(event):
     global Avance 
