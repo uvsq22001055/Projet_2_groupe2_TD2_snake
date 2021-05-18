@@ -35,7 +35,6 @@ DROITE = 5
 GAUCHE = 6 
 BAS = 7
 HAUT = 8
-vitesseTest = 2000
 
 # Variables globales:
 
@@ -57,6 +56,7 @@ transfo = -tete
 vitesse_entree = 2
 Avance = HAUT
 echec = False
+PseudoJoueur = 0
 
 #Defintions des fonctions :
 
@@ -303,6 +303,10 @@ def get_entry(event):
     vitesse_entree = var.get()
     Vitesse()
 
+def Entree_Joueur(event):
+    global PseudoJoueur
+    Pseudo_entree = Pseudo.get()
+
 
 ################################## Programme principal#############################
 
@@ -364,3 +368,20 @@ image_mur = ImageTk.PhotoImage(photo_mur)
 base()
 
 racine.mainloop()
+
+#3eme fenetre, choix du pseudo
+
+racine2 = tk.Tk()
+racine2.title("Choix du pseudo")
+racine2.geometry("320x70")
+
+Pseudo = tk.StringVar()
+
+question = tk.Label(racine2, text = "Entrer un pseudo", font = ('arial', '15'))
+info3 = tk.Entry(racine2, textvariable = Pseudo)
+
+question.grid(row = 0, column = 0)
+info3.grid(row = 1, column = 0)
+racine2.bind('<Return>', Entree_Joueur)
+
+racine2.mainloop()
