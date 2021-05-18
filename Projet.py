@@ -205,7 +205,6 @@ def Avance_Serpent():
             if Avance == HAUT:
                 if etat[x][y] == (tete -1) and etat[x][y-1] == MUR :
                     echec = True
-    print(etat)
     
 
 def Echec():
@@ -213,14 +212,11 @@ def Echec():
     id_time = canvas.after(vitesse, Echec)
     Avance = HAUT
     if echec == False:
-        print(Avance)
-        print(echec)
         Avance_Serpent()
         """MangerPomme()"""
         draw()
     elif echec == True:
         canvas.after_cancel(id_time)
-        print("ok")
 
 
 def Start(event):
