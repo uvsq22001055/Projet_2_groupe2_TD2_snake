@@ -57,6 +57,7 @@ vitesse_entree = 2
 Avance = HAUT
 echec = False
 PseudoJoueur = 0
+Pseudo = 'pseudo non défini'
 
 # Defintions des fonctions :
 
@@ -259,6 +260,7 @@ def Vitesse():
 
 def Pseudo():
     """A chaque début de partie le joueur doit rentrer un pseudo"""
+    global Pseudo
     racine2 = tk.Tk()
     racine2.title("Choix du pseudo")
     racine2.geometry("320x70")
@@ -285,8 +287,9 @@ def Score():
 def Score_texte():
     """le score est enregistré dans un fichier .txt"""
     global f, PseudoJoueur
+    inwrite = str(PseudoJoueur + " score = " + str(score[0]))
     f = open('score.txt', 'a')
-    f.write(PseudoJoueur + " score = " + str(score[0]))
+    f.write(inwrite)
     f.close()
 
 
@@ -322,8 +325,9 @@ def get_entry(event):
 
 
 def Entree_Joueur(event):
-    global PseudoJoueur
-    Pseudo_entree = Pseudo.get()
+    global PseudoJoueur, Pseudo
+    PseudoJoueur = Pseudo.get()
+    Score_texte()
 
 
 # Programme principal:
