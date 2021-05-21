@@ -35,7 +35,6 @@ DROITE = 5
 GAUCHE = 6 
 BAS = 7
 HAUT = 8
-vitesseTest = 2000
 
 # Variables globales:
 
@@ -57,6 +56,7 @@ transfo = -tete
 vitesse_entree = 2
 Avance = HAUT
 echec = False
+PseudoJoueur = 0
 
 #Defintions des fonctions :
 
@@ -147,21 +147,46 @@ def draw():
                 canvas.itemconfig(case[y][x], fill=coul)
             elif etat[y][x] == MUR:
                 coul = COULEUR_MUR
-                canvas.create_image(x*20+10, y*20+10, image=image_mur)           
+                canvas.create_image(x*20+10, y*20+10, image=image_mur)
+            Score_modifie()           
 
 
 def Avance_Serpent():
-    global echec
+    global echec, tete
     for x in range(1, ROW-1):
         for y in range(1, COL-1):
             if etat[x][y] == tete:  
                 if Avance == DROITE:
+                    if etat[x+1][y] != POMME :
+                        etat[x+1][y] = transfo
+                    else :
+                        tete += 1
+                        Generate_Pomme()
+                        score[0] +=1
                         etat[x+1][y] = transfo
                 elif Avance == GAUCHE:
+                    if etat[x-1][y] != POMME :
+                        etat[x-1][y] = transfo
+                    else :
+                        tete += 1
+                        Generate_Pomme()
+                        score[0] +=1
                         etat[x-1][y] = transfo
                 elif Avance == BAS:
+                    if etat[x][y+1] != POMME :
+                        etat[x][y+1] = transfo
+                    else :
+                        tete += 1
+                        Generate_Pomme()
+                        score[0] +=1
                         etat[x][y+1] = transfo
                 elif Avance == HAUT:
+                    if etat[x][y-1] != POMME :
+                        etat[x][y-1] = transfo
+                    else :
+                        tete += 1
+                        Generate_Pomme()
+                        score[0] +=1
                         etat[x][y-1] = transfo
             if etat[x][y] > 0:
                 etat[x][y] -= 1
@@ -180,7 +205,6 @@ def Avance_Serpent():
             if Avance == HAUT:
                 if etat[x][y] == (tete -1) and etat[x][y-1] == MUR :
                     echec = True
-    print(etat)
     
 
 def Echec():
@@ -188,14 +212,11 @@ def Echec():
     id_time = canvas.after(vitesse, Echec)
     Avance = HAUT
     if echec == False:
-        print(Avance)
-        print(echec)
         Avance_Serpent()
-        MangerPomme()
+        """MangerPomme()"""
         draw()
     elif echec == True:
         canvas.after_cancel(id_time)
-        print("ok")
 
 
 def Start(event):
@@ -248,10 +269,15 @@ def Score():
 
 def Score_texte():
     """le score est enregistré dans un fichier .txt"""
-    pseudo = input("Rentrez votre pseudo:" "\n")
+    global f, PseudoJoueur
     f = open('score.txt', 'w')
-    f.write(Pseudo, score[0])
+    f.write(PseudoJoueur + " score = " + str(score[0]))
     f.close()
+    racine2.destroy()
+
+def Score_modifie():
+    b = "score : ", str(score[0])
+    message_score.configure(text = b)
 
 def Avance_Gauche(event):
     global Avance 
@@ -277,6 +303,10 @@ def get_entry(event):
     vitesse_entree = var.get()
     Vitesse()
 
+def Entree_Joueur(event):
+    global PseudoJoueur
+    PseudoJoueur = Pseudo.get()
+    Score_texte()
 
 ################################## Programme principal#############################
 
@@ -319,11 +349,7 @@ canvas.grid(column = 0, row = 1, columnspan = 2)
 message_score.grid(column = 0, row = 0)
 message_vitesse.grid(column = 1, row = 0)
 
-canvas.bind_all('<KeyPress-d>', Fast)
-canvas.bind_all('<KeyPress-q>', Slow)
-canvas.bind_all('<KeyPress-s>', Medium)
 canvas.bind_all('<Return>', Start)
-canvas.bind_all('<KeyPress-v>', Vitesse)
 canvas.bind_all('<Right>', Avance_Droite)
 canvas.bind_all('<Left>', Avance_Gauche)
 canvas.bind_all('<Down>', Avance_Bas)
@@ -338,3 +364,20 @@ image_mur = ImageTk.PhotoImage(photo_mur)
 base()
 
 racine.mainloop()
+
+#3eme fenetre, choix du pseudo
+
+racine2 = tk.Tk()
+racine2.title("Choix du pseudo")
+racine2.geometry("320x70")
+
+Pseudo = tk.StringVar()
+
+question = tk.Label(racine2, text = "Entrer un pseudo", font = ('arial', '15'))
+info3 = tk.Entry(racine2, textvariable = Pseudo)
+
+question.grid(row = 0, column = 0)
+info3.grid(row = 1, column = 0)
+racine2.bind('<Return>', Entree_Joueur)
+
+racine2.mainloop()
