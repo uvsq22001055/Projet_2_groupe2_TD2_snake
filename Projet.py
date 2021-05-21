@@ -97,9 +97,9 @@ def MangerPomme():
 
 def Generate_Serpent():
     """Génération du serpent"""
-    etat[15][15] = 3
+    etat[15][15] = 1
     etat[15][14] = 2
-    etat[15][13] = 1
+    etat[15][13] = 3
 
 
 def base():
@@ -194,16 +194,16 @@ def Avance_Serpent():
     for x in range(1, ROW-1):
         for y in range(1, COL-1):
             if Avance == DROITE:
-                if etat[x][y] == (tete -1) and etat[x+1][y] == MUR:
+                if etat[x][y] == (tete -1) and etat[x+1][y] == MUR or etat[x][y] == transfo and etat[x+1][y] > 0 :
                     echec = True
             if Avance == GAUCHE:
-                if etat[x][y] == (tete -1) and etat[x-1][y] == MUR :
+                if etat[x][y] == (tete -1) and etat[x-1][y] == MUR or etat[x][y] == transfo and etat[x-1][y] > 0 :
                     echec = True
             if Avance == BAS:
-                if etat[x][y] == (tete -1) and etat[x][y+1] == MUR :
+                if etat[x][y] == (tete -1) and etat[x][y+1] == MUR or etat[x][y] == transfo and etat[x][y+1] > 0 :
                     echec = True
             if Avance == HAUT:
-                if etat[x][y] == (tete -1) and etat[x][y-1] == MUR :
+                if etat[x][y] == (tete -1) and etat[x][y-1] == MUR or etat[x][y] == transfo and etat[x][y-1] > 0 :
                     echec = True
     
 
@@ -217,6 +217,7 @@ def Echec():
         draw()
     elif echec == True:
         canvas.after_cancel(id_time)
+        Pseudo()
 
 
 def Start(event):
@@ -257,7 +258,21 @@ def Vitesse():
 
 
 def Pseudo():
-    """A chaque début de partie le joueur doit rentrer un pseudo""" 
+    """A chaque début de partie le joueur doit rentrer un pseudo"""
+    racine2 = tk.Tk()
+    racine2.title("Choix du pseudo")
+    racine2.geometry("320x70")
+
+    Pseudo = tk.StringVar()
+
+    question = tk.Label(racine2, text = "Entrer un pseudo", font = ('arial', '15'))
+    info3 = tk.Entry(racine2, textvariable = Pseudo)
+
+    question.grid(row = 0, column = 0)
+    info3.grid(row = 1, column = 0)
+    racine2.bind('<Return>', Entree_Joueur)
+
+    racine2.mainloop()
 
 
 def Score():
@@ -270,7 +285,7 @@ def Score():
 def Score_texte():
     """le score est enregistré dans un fichier .txt"""
     global f, PseudoJoueur
-    f = open('score.txt', 'w')
+    f = open('score.txt', 'a')
     f.write(PseudoJoueur + " score = " + str(score[0]))
     f.close()
     racine2.destroy()
@@ -367,17 +382,3 @@ racine.mainloop()
 
 #3eme fenetre, choix du pseudo
 
-racine2 = tk.Tk()
-racine2.title("Choix du pseudo")
-racine2.geometry("320x70")
-
-Pseudo = tk.StringVar()
-
-question = tk.Label(racine2, text = "Entrer un pseudo", font = ('arial', '15'))
-info3 = tk.Entry(racine2, textvariable = Pseudo)
-
-question.grid(row = 0, column = 0)
-info3.grid(row = 1, column = 0)
-racine2.bind('<Return>', Entree_Joueur)
-
-racine2.mainloop()
