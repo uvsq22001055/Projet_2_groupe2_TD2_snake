@@ -257,7 +257,7 @@ def Vitesse():
 
 
 def Pseudo():
-    """A chaque début de partie le joueur doit rentrer un pseudo"""
+    """A chaque début de partie le joueur doit rentrer un pseudo""" 
 
 
 def Score():
