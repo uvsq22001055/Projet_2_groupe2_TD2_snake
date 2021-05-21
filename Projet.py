@@ -74,7 +74,7 @@ def MangerPomme():
     global tete
     for x in range(1, ROW-1):
         for y in range(1, COL-1):
-            if etat[x][y] == transfo:  
+            if etat[x][y] == tete:  
                 if Avance == DROITE and etat[x+1][y] == POMME:
                     tete += 1
                     Generate_Pomme()
