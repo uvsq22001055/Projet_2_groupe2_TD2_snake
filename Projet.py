@@ -269,11 +269,11 @@ def Score():
 
 def Score_texte():
     """le score est enregistré dans un fichier .txt"""
-    pseudo = input("Rentrez votre pseudo:" "\n")
+    global f, PseudoJoueur
     f = open('score.txt', 'w')
-    f.write(Pseudo, score[0])
+    f.write(PseudoJoueur + " score = " + str(score[0]))
     f.close()
-
+    racine2.destroy()
 
 def Score_modifie():
     b = "score : ", str(score[0])
@@ -305,8 +305,8 @@ def get_entry(event):
 
 def Entree_Joueur(event):
     global PseudoJoueur
-    Pseudo_entree = Pseudo.get()
-
+    PseudoJoueur = Pseudo.get()
+    Score_texte()
 
 ################################## Programme principal#############################
 
@@ -349,11 +349,7 @@ canvas.grid(column = 0, row = 1, columnspan = 2)
 message_score.grid(column = 0, row = 0)
 message_vitesse.grid(column = 1, row = 0)
 
-canvas.bind_all('<KeyPress-d>', Fast)
-canvas.bind_all('<KeyPress-q>', Slow)
-canvas.bind_all('<KeyPress-s>', Medium)
 canvas.bind_all('<Return>', Start)
-canvas.bind_all('<KeyPress-v>', Vitesse)
 canvas.bind_all('<Right>', Avance_Droite)
 canvas.bind_all('<Left>', Avance_Gauche)
 canvas.bind_all('<Down>', Avance_Bas)
