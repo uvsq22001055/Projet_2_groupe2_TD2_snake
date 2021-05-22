@@ -154,6 +154,7 @@ def draw():
 
 
 def Avance_Serpent():
+    """Permet au serpent d'avancer de de manegr des pommes, qui qui permet de changer le score et la position des pommes"""
     global echec, tete
     for x in range(1, ROW-1):
         for y in range(1, COL-1):
@@ -260,15 +261,15 @@ def Vitesse():
 
 def Pseudo():
     """A chaque début de partie le joueur doit rentrer un pseudo"""
-    global Pseudo
+    global racine2, pseudo
     racine2 = tk.Tk()
     racine2.title("Choix du pseudo")
     racine2.geometry("320x70")
 
-    Pseudo = tk.StringVar()
+    pseudo = tk.StringVar()
 
     question = tk.Label(racine2, text = "Entrer un pseudo", font = ('arial', '15'))
-    info3 = tk.Entry(racine2, textvariable = Pseudo)
+    info3 = tk.Entry(racine2, textvariable = pseudo)
 
     question.grid(row = 0, column = 0)
     info3.grid(row = 1, column = 0)
@@ -286,8 +287,8 @@ def Score():
 
 def Score_texte():
     """le score est enregistré dans un fichier .txt"""
-    global f, PseudoJoueur
-    inwrite = str(PseudoJoueur + " score = " + str(score[0]))
+    global PseudoJoueur
+    inwrite = (str(PseudoJoueur) + " score = " + str(score[0]))
     f = open('score.txt', 'a')
     f.write(inwrite)
     f.close()
@@ -325,9 +326,10 @@ def get_entry(event):
 
 
 def Entree_Joueur(event):
-    global PseudoJoueur, Pseudo
-    PseudoJoueur = Pseudo.get()
+    global pseudo
+    PseudoJoueur = pseudo.get()
     Score_texte()
+    racine2.destroy()
 
 
 # Programme principal:
