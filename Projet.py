@@ -72,31 +72,6 @@ def Generate_Pomme():
         Generate_Pomme()
 
 
-def MangerPomme():
-    global tete
-    for x in range(1, ROW-1):
-        for y in range(1, COL-1):
-            if etat[x][y] == transfo:
-                if Avance == DROITE and etat[x+1][y] == POMME:
-                    tete += 1
-                    Generate_Pomme()
-                    score[0] += 1
-                elif Avance == GAUCHE and etat[x-1][y] == POMME:
-                    tete += 1
-                    Generate_Pomme()
-                    score[0] += 1
-                elif Avance == BAS and etat[x][y+1] == POMME:
-                    etat[x][y+1] = FOND
-                    tete += 1
-                    Generate_Pomme()
-                    score[0] += 1
-                elif Avance == HAUT and etat[x][y-1] == POMME:
-                    etat[x][y-1] = FOND
-                    tete += 1
-                    Generate_Pomme()
-                    score[0] += 1
-
-
 def Generate_Serpent():
     """Génération du serpent"""
     etat[15][15] = 1
@@ -215,7 +190,6 @@ def Echec():
     id_time = canvas.after(vitesse, Echec)
     if echec == False:
         Avance_Serpent()
-        """MangerPomme()"""
         draw()
     else:
         canvas.after_cancel(id_time)
@@ -395,6 +369,7 @@ image_pomme = ImageTk.PhotoImage(photo_pomme)
 
 photo_mur = Image.open("mur.png")
 image_mur = ImageTk.PhotoImage(photo_mur)
+
 
 base()
 
