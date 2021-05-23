@@ -334,17 +334,6 @@ def Terrain3():
 
 def Terrain():
     global terrain, Couleur_Fond
-    res = 0
-    li = []
-    a = 0
-    fic = open("terre.txt", "r")
-    for ligne in fic:
-        note = ligne.split()[0]
-        li.append(note)
-        res += int(note)
-        li[a] = list(note.strip())
-        a += 1
-    fic.close()
     if terrain == 1:
         Couleur_Fond = '#3bbf3e'
     elif terrain == 2:
