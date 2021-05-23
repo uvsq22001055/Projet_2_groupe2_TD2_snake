@@ -60,6 +60,7 @@ echec = False
 pseudo_joueur = 0
 pseudo = 'pseudo non défini'
 pomme = 0
+top_ten = []
 
 
 # Defintions des fonctions :
@@ -299,6 +300,17 @@ def EntreJoueur(event):
     racine2.destroy()
 
 
+def AffichageTopTen():
+    fic = open("score.txt","r")
+    for ligne in fic:
+        score = int(ligne.split()[3])
+        top_ten.append(score)
+    top_ten.sort(reverse=True)
+    del top_ten[10:]
+    print(top_ten)
+    fic.close()  
+
+
 # Programme principal:
 
 # 1ere fenetre demande vitesse
@@ -383,5 +395,5 @@ racine2.bind('<Return>', EntreJoueur)
 
 racine2.mainloop()
 
-
+AffichageTopTen()
 
