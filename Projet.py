@@ -139,7 +139,6 @@ def Draw():
             elif etat[y][x] == MUR:
                 coul = COULEUR_MUR
                 canvas.create_image(x*20+10, y*20+10, image=image_mur)
-            ScoreModifie()
 
 
 def AvanceSerpent():
@@ -159,6 +158,7 @@ def AvanceSerpent():
                         GeneratePomme()
                         score[0] += 1
                         etat[y+1][x] = transfo
+                        ScoreModifie()
                 elif avance == HAUT:
                     if etat[y-1][x] != POMME:
                         etat[y-1][x] = transfo
@@ -167,6 +167,7 @@ def AvanceSerpent():
                         GeneratePomme()
                         score[0] += 1
                         etat[y-1][x] = transfo
+                        ScoreModifie()
                 elif avance == DROITE:
                     if etat[y][x+1] != POMME:
                         etat[y][x+1] = transfo
@@ -175,6 +176,7 @@ def AvanceSerpent():
                         GeneratePomme()
                         score[0] += 1
                         etat[y][x+1] = transfo
+                        ScoreModifie()
                 elif avance == GAUCHE:
                     if etat[y][x-1] != POMME:
                         etat[y][x-1] = transfo
@@ -183,6 +185,7 @@ def AvanceSerpent():
                         GeneratePomme()
                         score[0] += 1
                         etat[y][x-1] = transfo
+                        ScoreModifie()
             if etat[y][x] > 0:
                 etat[y][x] -= 1
     Generate_Decor()
@@ -250,25 +253,17 @@ def Vitesse():
     racine1.destroy()
 
 
-def Score():
-    """le score est affiché sur une partie de l'écran"""
-    if score[0] != compteur[0]:
-        canvas.itemconfig(message_score, text=score[0])
-        score[0] = compteur[0]
-
-
 def ScoreText():
     """le score est enregistré dans un fichier .txt"""
     global pseudo_joueur
-    inwrite = str(pseudo_joueur) + " score = " + str(score[0])
+    inwrite = str(pseudo_joueur) + " score = " + str(score[0]) + "\n"
     f = open('score.txt', 'a')
     f.write(inwrite)
     f.close()
 
 
 def ScoreModifie():
-    b = "score : ", str(score[0])
-    message_score.configure(text=b)
+    message_score.configure(text="score :" + str(score[0]))
 
 
 def AvanceGauche(event):
@@ -387,3 +382,6 @@ info3.grid(row=1, column=0)
 racine2.bind('<Return>', EntreJoueur)
 
 racine2.mainloop()
+
+
+
