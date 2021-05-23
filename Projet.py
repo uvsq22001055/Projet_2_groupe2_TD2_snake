@@ -107,6 +107,7 @@ def Base():
     GenerateSerpent()
     CreationPomme()
     Draw()
+    print("terrain", terrain)
 
 
 def Generate_Decor():
@@ -340,6 +341,7 @@ def Terrain():
         Couleur_Fond = '#bd8af6'
     elif terrain == 3:
         Couleur_Fond = '#fccf66'
+    
 
 
 def Change_Terrain():
@@ -403,9 +405,9 @@ racine1.bind('<Return>', GetEntry)
 
 
 infoterr = tk.Label(racine1, text="Choix du Terrain", font=('arial', '15'))
-button1 = tk.Button(racine1,  image=t1, width= 50, height = 50, command=Terrain1())
-button2 = tk.Button(racine1,  image=t2, width= 50, height = 50, command=Terrain2())
-button3 = tk.Button(racine1,  image=t3, width= 50, height = 50, command=Terrain3())
+button1 = tk.Button(racine1,  image=t1, width= 50, height = 50, command=Terrain1)
+button2 = tk.Button(racine1,  image=t2, width= 50, height = 50, command=Terrain2)
+button3 = tk.Button(racine1,  image=t3, width= 50, height = 50, command=Terrain3)
 
 
 info.grid(row=0, column=0, columnspan=5)
