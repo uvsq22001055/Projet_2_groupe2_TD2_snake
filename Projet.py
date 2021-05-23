@@ -40,7 +40,7 @@ BAS = 7
 HAUT = 8
 
 # Variables globales:
-Couleur_Fond = '#3bbf3e'
+Couleur_Fond = '#71cf57'
 case = [[0 for row in range(ROW)] for col in range(COL)]
 etat = [[FOND for row in range(ROW)] for col in range(COL)]
 time = [[0 for row in range(ROW)] for col in range(COL)]
@@ -334,9 +334,9 @@ def Terrain3():
 def Terrain():
     global terrain, Couleur_Fond
     if terrain == 1:
-        Couleur_Fond = '#3bbf3e'
+        Couleur_Fond = '#71cf57'
     elif terrain == 2:
-        Couleur_Fond = '#bd8af6'
+        Couleur_Fond = '#dbbefc'
     elif terrain == 3:
         Couleur_Fond = '#fccf66'
 
