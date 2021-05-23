@@ -266,6 +266,8 @@ def ScoreText():
 def ScoreModifie():
     message_score.configure(text="score :" + str(score[0]))
 
+def ScoreModifie():
+    message_score.configure(text="score :" + str(score[0]))
 
 def AvanceGauche(event):
     global avance
@@ -463,8 +465,7 @@ photo_mur = Image.open("mur.png")
 image_mur = ImageTk.PhotoImage(photo_mur)
 
 
-Base()
-print(echec)
+Base() 
 racine.mainloop()
 
 racine2 = tk.Tk()
