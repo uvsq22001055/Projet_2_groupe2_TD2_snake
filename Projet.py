@@ -388,6 +388,15 @@ racine1.geometry("330x200")
 
 var = tk.StringVar()
 
+photo_t1 = Image.open("terrain_1.png")
+t1 = ImageTk.PhotoImage(photo_t1)
+
+photo_t2 = Image.open("terrain_2.png")
+t2 = ImageTk.PhotoImage(photo_t2)
+
+photo_t3 = Image.open("terrain_3.png")
+t3 = ImageTk.PhotoImage(photo_t3)
+
 info = tk.Label(racine1, text="Choix du mode de vitesse", font=('arial', '15'))
 buttonl = tk.Button(racine1,
                     text='lent', font=('arial', '10'), command=Slow)
@@ -401,13 +410,11 @@ info2 = tk.Label(racine1,
 e1 = tk.Entry(racine1, textvariable=var)
 racine1.bind('<Return>', GetEntry)
 
+
 infoterr = tk.Label(racine1, text="Choix du Terrain", font=('arial', '15'))
-button1 = tk.Button(racine1,
-                    text='Terrain 1', font=('arial', '10'), command=Terrain1)
-button2 = tk.Button(racine1,
-                    text='Terrain 2', font=('arial', '10'), command=Terrain2)
-button3 = tk.Button(racine1,
-                    text='Terrain 3', font=('arial', '10'), command=Terrain3)
+button1 = tk.Button(racine1,  image=t1, width= 50, height = 50, command=Terrain1())
+button2 = tk.Button(racine1,  image=t2, width= 50, height = 50, command=Terrain2())
+button3 = tk.Button(racine1,  image=t3, width= 50, height = 50, command=Terrain3())
 
 
 info.grid(row=0, column=0, columnspan=5)
