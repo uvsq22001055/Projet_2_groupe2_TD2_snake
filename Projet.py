@@ -107,7 +107,6 @@ def Base():
     GenerateSerpent()
     CreationPomme()
     Draw()
-    print("terrain", terrain, echec)
 
 
 def Generate_Decor():
@@ -268,9 +267,6 @@ def ScoreModifie():
     message_score.configure(text="score :" + str(score[0]))
 
 
-def ScoreModifie():
-    message_score.configure(text="score :" + str(score[0]))
-
 
 def AvanceGauche(event):
     global avance
@@ -405,10 +401,10 @@ e1 = tk.Entry(racine1, textvariable=var)
 racine1.bind('<Return>', GetEntry)
 
 
-infoterr = tk.Label(racine1, text="Choix du Terrain", font= ('arial', '15'))
-button1 = tk.Button(racine1,  image=t1, width= 50, height = 50, command=Terrain1)
-button2 = tk.Button(racine1,  image=t2, width= 50, height = 50, command=Terrain2)
-button3 = tk.Button(racine1,  image=t3, width= 50, height = 50, command=Terrain3)
+infoterr = tk.Label(racine1, text="Choix du Terrain", font=('arial', '15'))
+button1 = tk.Button(racine1,  image=t1, width=50, height=50, command=Terrain1)
+button2 = tk.Button(racine1,  image=t2, width=50, height=50, command=Terrain2)
+button3 = tk.Button(racine1,  image=t3, width=50, height=50, command=Terrain3)
 
 
 info.grid(row=0, column=0, columnspan=5)
@@ -456,7 +452,9 @@ image_pomme = ImageTk.PhotoImage(photo_pomme)
 photo_mur = Image.open("mur.png")
 image_mur = ImageTk.PhotoImage(photo_mur)
 
+
 Base()
+
 racine.mainloop()
 
 racine2 = tk.Tk()
