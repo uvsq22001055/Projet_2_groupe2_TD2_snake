@@ -325,12 +325,6 @@ def Terrain2():
     Terrain()
 
 
-def Terrain3():
-    global terrain
-    terrain = 3
-    Terrain()
-
-
 def Terrain():
     global terrain, Couleur_Fond
     if terrain == 1:
@@ -351,22 +345,12 @@ def Change_Terrain():
             etat[x][5] = MUR
         for x in range(8, 20):
             etat[x][25] = MUR
-    elif terrain == 3:
-        for x in range(3, 8):
-            etat[x][10] = MUR
-        for y in range(10, 20):
-            etat[3][y] = MUR
-        for y in range(2, 11):
-            etat[20][y] = MUR
-        for x in range(20, 28):
-            etat[x][5] = MUR
-        for y in range(5, 13):
-            etat[7][y] = MUR
-        for x in range(13, 25):
-            etat[x][25] = MUR
-        for y in range(10, 18):
-            etat[25][y] = MUR
 
+
+def Aléatoire():
+    global terrain
+    terrain = rd.randint(1, 2)
+    Terrain()
 
 # Programme principal:
 
@@ -384,7 +368,7 @@ t1 = ImageTk.PhotoImage(photo_t1)
 photo_t2 = Image.open("terrain_2.png")
 t2 = ImageTk.PhotoImage(photo_t2)
 
-photo_t3 = Image.open("terrain_3.png")
+photo_t3 = Image.open("mark.jpg")
 t3 = ImageTk.PhotoImage(photo_t3)
 
 info = tk.Label(racine1, text="Choix du mode de vitesse", font=('arial', '15'))
@@ -404,7 +388,7 @@ racine1.bind('<Return>', GetEntry)
 infoterr = tk.Label(racine1, text="Choix du Terrain", font=('arial', '15'))
 button1 = tk.Button(racine1,  image=t1, width=50, height=50, command=Terrain1)
 button2 = tk.Button(racine1,  image=t2, width=50, height=50, command=Terrain2)
-button3 = tk.Button(racine1,  image=t3, width=50, height=50, command=Terrain3)
+button3 = tk.Button(racine1,  image=t3, width=50, height=50, command=Aléatoire)
 
 
 info.grid(row=0, column=0, columnspan=5)
