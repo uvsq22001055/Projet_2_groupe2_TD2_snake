@@ -40,7 +40,7 @@ BAS = 7
 HAUT = 8
 
 # Variables globales:
-Couleur_Fond = '#3bbf3e'
+Couleur_Fond = '#71cf57'
 case = [[0 for row in range(ROW)] for col in range(COL)]
 etat = [[FOND for row in range(ROW)] for col in range(COL)]
 time = [[0 for row in range(ROW)] for col in range(COL)]
@@ -59,8 +59,6 @@ pseudo_joueur = 0
 pseudo = 'pseudo non défini'
 pomme = 0
 top_ten = []
-joueurs = []
-top_joueurs = []
 terrain = 1
 
 
@@ -304,18 +302,15 @@ def EntreJoueur(event):
 
 
 def AffichageTopTen():
-    score_joueurs = []
     fic = open("score.txt", "r")
     for ligne in fic:
         score = int(ligne.split()[3])
-        joueurs = str(ligne.split()[0])
-        score_joueurs = [score, joueurs]
-        top_ten.append(score_joueurs)
-    sorted_top_ten = sorted(top_ten)
-    sorted_top_ten.reverse()
-    del sorted_top_ten[10:]
-    print(sorted_top_ten)
+        top_ten.append(score)
+    top_ten.sort(reverse=True)
+    del top_ten[10:]
+    print(top_ten)
     fic.close()
+    pass
 
 
 def Terrain1():
@@ -330,18 +325,12 @@ def Terrain2():
     Terrain()
 
 
-def Terrain3():
-    global terrain
-    terrain = 3
-    Terrain()
-
-
 def Terrain():
     global terrain, Couleur_Fond
     if terrain == 1:
-        Couleur_Fond = '#3bbf3e'
+        Couleur_Fond = '#71cf57'
     elif terrain == 2:
-        Couleur_Fond = '#bd8af6'
+        Couleur_Fond = '#dbbefc'
     elif terrain == 3:
         Couleur_Fond = '#fccf66'
 
@@ -350,28 +339,31 @@ def Change_Terrain():
     """Définie l'emplacement des mur des différents niveaux"""
     global terrain
     if terrain == 2:
-        for y in range(12, 19):
-            etat[25][y] = MUR
-        for x in range(8, 20):
-            etat[x][5] = MUR
-        for x in range(8, 20):
-            etat[x][25] = MUR
-    elif terrain == 3:
-        for x in range(3, 8):
-            etat[x][10] = MUR
-        for y in range(10, 20):
-            etat[3][y] = MUR
-        for y in range(2, 11):
-            etat[20][y] = MUR
-        for x in range(20, 28):
-            etat[x][5] = MUR
-        for y in range(5, 13):
-            etat[7][y] = MUR
-        for x in range(13, 25):
-            etat[x][25] = MUR
-        for y in range(10, 18):
-            etat[25][y] = MUR
+      terr = []
+      test_list = []
+      fic = open("terrain.txt","r")
+      for ligne in fic:
+          note = ligne.rsplit(",")
+      fic.close()
+      print("note = ", note)
+      for i in range(0, len(note)):
+        a = note[i]
+        b = a.rsplit()
+        terr.append(b)
+        i += 1
+      for i in range(0, len(terr)):
+        for j in range(0, 2):
+          terr[i][j] = int(terr[i][j])
+      for i in range(0, len(terr)):
+        x = terr[i][0]
+        y = terr[i][1]
+        etat[x][y] = MUR
 
+
+def Aléatoire():
+    global terrain
+    terrain = rd.randint(1, 2)
+    Terrain()
 
 # Programme principal:
 
@@ -389,7 +381,7 @@ t1 = ImageTk.PhotoImage(photo_t1)
 photo_t2 = Image.open("terrain_2.png")
 t2 = ImageTk.PhotoImage(photo_t2)
 
-photo_t3 = Image.open("terrain_3.png")
+photo_t3 = Image.open("mark.jpg")
 t3 = ImageTk.PhotoImage(photo_t3)
 
 info = tk.Label(racine1, text="Choix du mode de vitesse", font=('arial', '15'))
@@ -409,7 +401,7 @@ racine1.bind('<Return>', GetEntry)
 infoterr = tk.Label(racine1, text="Choix du Terrain", font=('arial', '15'))
 button1 = tk.Button(racine1,  image=t1, width=50, height=50, command=Terrain1)
 button2 = tk.Button(racine1,  image=t2, width=50, height=50, command=Terrain2)
-button3 = tk.Button(racine1,  image=t3, width=50, height=50, command=Terrain3)
+button3 = tk.Button(racine1,  image=t3, width=50, height=50, command=Aléatoire)
 
 
 info.grid(row=0, column=0, columnspan=5)
