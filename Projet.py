@@ -13,13 +13,13 @@
 # https://github.com/uvsq22001055/Projet_2_groupe2_TD2_snake.git
 ################
 
-# Import des librairies :
+# Import des librairies:
 from typing import Tuple
 from PIL import Image, ImageTk
 import tkinter as tk
 import random as rd
 
-# Definitions des contantes :
+# Definitions des contantes:
 
 
 WIDTH, HEIGHT = 600, 600
@@ -124,6 +124,7 @@ def Generate_Decor():
                 etat[y][x] = MUR
     Change_Terrain()
 
+
 def Draw():
     for y in range(ROW):
         for x in range(COL):
@@ -193,7 +194,7 @@ def AvanceSerpent():
     cherche = 0
     for y in range(1, ROW-1):
         for x in range(1, COL-1):
-            if avance == DROITE :
+            if avance == DROITE:
                 if etat[y][x] == transfo and etat[y+1][x] > 0:
                     echec = True
             if avance == GAUCHE:
@@ -206,9 +207,10 @@ def AvanceSerpent():
                 if etat[y][x] == transfo and etat[y][x-1] > 0:
                     echec = True
             if etat[x][y] == transfo:
-                cherche +=1
+                cherche += 1
     if cherche == 0:
         echec = True
+
 
 def Echec():
     global echec, vitesse
@@ -271,28 +273,27 @@ def ScoreModifie():
     message_score.configure(text="score :" + str(score[0]))
 
 
-
 def AvanceGauche(event):
     global avance
-    if avance != DROITE :
+    if avance != DROITE:
         avance = GAUCHE
 
 
 def AvanceDroite(event):
     global avance
-    if avance != GAUCHE :
+    if avance != GAUCHE:
         avance = DROITE
 
 
 def AvanceHaut(event):
     global avance
-    if avance != BAS :
+    if avance != BAS:
         avance = HAUT
 
 
 def AvanceBas(event):
     global avance
-    if avance != HAUT :
+    if avance != HAUT:
         avance = BAS
 
 
@@ -323,9 +324,8 @@ def AffichageTopTen():
     fic.close()
 
     f = open('top10.txt', 'w')
-    for i in range(0, len(sorted_top_ten)) :
+    for i in range(0, len(sorted_top_ten)):
         inwrite = str(sorted_top_ten[0+i][1]) + " score = " + str(sorted_top_ten[0+i][0]) + "\n"
-    
         f = open('top10.txt', 'a')
         f.write(inwrite)
         f.close()
@@ -357,24 +357,23 @@ def Change_Terrain():
     """Définie l'emplacement des mur des différents niveaux"""
     global terrain
     if terrain == 2:
-      terr = []
-      test_list = []
-      fic = open("terrain.txt","r")
-      for ligne in fic:
-          note = ligne.rsplit(",")
-      fic.close()
-      for i in range(0, len(note)):
-        a = note[i]
-        b = a.rsplit()
-        terr.append(b)
-        i += 1
-      for i in range(0, len(terr)):
-        for j in range(0, 2):
-          terr[i][j] = int(terr[i][j])
-      for i in range(0, len(terr)):
-        x = terr[i][0]
-        y = terr[i][1]
-        etat[x][y] = MUR
+        terr = []
+        fic = open("terrain.txt", "r")
+        for ligne in fic:
+            note = ligne.rsplit(",")
+        fic.close()
+        for i in range(0, len(note)):
+            a = note[i]
+            b = a.rsplit()
+            terr.append(b)
+            i += 1
+        for i in range(0, len(terr)):
+            for j in range(0, 2):
+                terr[i][j] = int(terr[i][j])
+        for i in range(0, len(terr)):
+            x = terr[i][0]
+            y = terr[i][1]
+            etat[x][y] = MUR
 
 
 def Aléatoire():
@@ -385,6 +384,7 @@ def Aléatoire():
 # Programme principal:
 
 # 1ere fenetre demande vitesse
+
 
 racine1 = tk.Tk()
 racine1.title("Choix Terrain et Vitesse")
