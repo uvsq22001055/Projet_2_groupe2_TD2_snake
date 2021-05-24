@@ -123,7 +123,6 @@ def Generate_Decor():
             elif x == (COL - 1):
                 etat[y][x] = MUR
     Change_Terrain()
-    print (echec, etat)
 
 def Draw():
     for y in range(ROW):
@@ -306,9 +305,9 @@ def AffichageTopTen():
     sorted_top_ten = sorted(top_ten)
     sorted_top_ten.reverse()
     del sorted_top_ten[10:]
-    print(sorted_top_ten)
     fic.close()
 
+    f = open('top10.txt', 'w')
     for i in range(0, len(sorted_top_ten)) :
         inwrite = str(sorted_top_ten[0+i][1]) + " score = " + str(sorted_top_ten[0+i][0]) + "\n"
     
