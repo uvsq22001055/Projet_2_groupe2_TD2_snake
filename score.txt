@@ -1,1 +1,1 @@
-kom score = 0
+po score = 2
