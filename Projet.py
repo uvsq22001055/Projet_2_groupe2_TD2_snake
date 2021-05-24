@@ -296,15 +296,25 @@ def EntreJoueur(event):
 
 
 def AffichageTopTen():
+    score_joueurs = []
     fic = open("score.txt", "r")
     for ligne in fic:
         score = int(ligne.split()[3])
-        top_ten.append(score)
-    top_ten.sort(reverse=True)
-    del top_ten[10:]
-    print(top_ten)
+        joueurs = str(ligne.split()[0])
+        score_joueurs = [score, joueurs]
+        top_ten.append(score_joueurs)
+    sorted_top_ten = sorted(top_ten)
+    sorted_top_ten.reverse()
+    del sorted_top_ten[10:]
+    print(sorted_top_ten)
     fic.close()
-    pass
+
+    for i in range(0, len(sorted_top_ten)) :
+        inwrite = str(sorted_top_ten[0+i][1]) + " score = " + str(sorted_top_ten[0+i][0]) + "\n"
+    
+    f = open('top10.txt', 'a')
+    f.write(inwrite)
+    f.close()
 
 
 def Terrain1():
