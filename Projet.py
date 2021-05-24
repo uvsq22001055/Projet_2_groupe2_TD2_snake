@@ -123,7 +123,6 @@ def Generate_Decor():
             elif x == (COL - 1):
                 etat[y][x] = MUR
     Change_Terrain()
-    print (echec, etat)
 
 def Draw():
     for y in range(ROW):
@@ -306,15 +305,15 @@ def AffichageTopTen():
     sorted_top_ten = sorted(top_ten)
     sorted_top_ten.reverse()
     del sorted_top_ten[10:]
-    print(sorted_top_ten)
     fic.close()
 
+    f = open('top10.txt', 'w')
     for i in range(0, len(sorted_top_ten)) :
         inwrite = str(sorted_top_ten[0+i][1]) + " score = " + str(sorted_top_ten[0+i][0]) + "\n"
     
-    f = open('top10.txt', 'a')
-    f.write(inwrite)
-    f.close()
+        f = open('top10.txt', 'a')
+        f.write(inwrite)
+        f.close()
 
 
 def Terrain1():
@@ -373,7 +372,7 @@ def Aléatoire():
 # 1ere fenetre demande vitesse
 
 racine1 = tk.Tk()
-racine1.title("Choix vitesse")
+racine1.title("Choix Terrain et Vitesse")
 racine1.geometry("330x200")
 
 var = tk.StringVar()
@@ -407,17 +406,17 @@ button2 = tk.Button(racine1,  image=t2, width=50, height=50, command=Terrain2)
 button3 = tk.Button(racine1,  image=t3, width=50, height=50, command=Aléatoire)
 
 
-info.grid(row=0, column=0, columnspan=5)
-buttonl.grid(row=2, column=0)
-buttonm.grid(row=2, column=2)
-buttonr.grid(row=2, column=4)
-info2.grid(row=3, column=0, columnspan=5)
-e1.grid(row=4, column=2)
+info.grid(row=2, column=0, columnspan=5)
+buttonl.grid(row=3, column=0)
+buttonm.grid(row=3, column=2)
+buttonr.grid(row=3, column=4)
+info2.grid(row=4, column=0, columnspan=5)
+e1.grid(row=5, column=2)
 
-infoterr.grid(row=5, column=0, columnspan=5)
-button1.grid(row=6, column=0)
-button2.grid(row=6, column=2)
-button3.grid(row=6, column=4)
+infoterr.grid(row=0, column=0, columnspan=5)
+button1.grid(row=1, column=0)
+button2.grid(row=1, column=2)
+button3.grid(row=1, column=4)
 
 racine1.mainloop()
 
@@ -436,11 +435,7 @@ canvas.grid(column=0, row=1, columnspan=2)
 message_score.grid(column=0, row=0)
 message_vitesse.grid(column=1, row=0)
 
-canvas.bind_all('<KeyPress-d>', Fast)
-canvas.bind_all('<KeyPress-q>', Slow)
-canvas.bind_all('<KeyPress-s>', Medium)
 canvas.bind_all('<Return>', Start)
-canvas.bind_all('<KeyPress-v>', Vitesse)
 canvas.bind_all('<Right>', AvanceDroite)
 canvas.bind_all('<Left>', AvanceGauche)
 canvas.bind_all('<Down>', AvanceBas)
