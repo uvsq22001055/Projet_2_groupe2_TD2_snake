@@ -14,7 +14,6 @@
 ################
 
 # Import des librairies:
-from typing import Tuple
 from PIL import Image, ImageTk
 import tkinter as tk
 import random as rd
