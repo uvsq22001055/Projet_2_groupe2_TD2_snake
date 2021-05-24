@@ -193,11 +193,22 @@ def AvanceSerpent():
     cherche = 0
     for y in range(1, ROW-1):
         for x in range(1, COL-1):
+            if avance == DROITE :
+                if etat[y][x] == transfo and etat[y+1][x] > 0:
+                    echec = True
+            if avance == GAUCHE:
+                if etat[y][x] == transfo and etat[y-1][x] > 0:
+                    echec = True
+            if avance == BAS:
+                if etat[y][x] == transfo and etat[y][x+1] > 0:
+                    echec = True
+            if avance == HAUT:
+                if etat[y][x] == transfo and etat[y][x-1] > 0:
+                    echec = True
             if etat[x][y] == transfo:
                 cherche +=1
     if cherche == 0:
         echec = True
-
 
 def Echec():
     global echec, vitesse
@@ -263,22 +274,26 @@ def ScoreModifie():
 
 def AvanceGauche(event):
     global avance
-    avance = GAUCHE
+    if avance != DROITE :
+        avance = GAUCHE
 
 
 def AvanceDroite(event):
     global avance
-    avance = DROITE
+    if avance != GAUCHE :
+        avance = DROITE
 
 
 def AvanceHaut(event):
     global avance
-    avance = HAUT
+    if avance != BAS :
+        avance = HAUT
 
 
 def AvanceBas(event):
     global avance
-    avance = BAS
+    if avance != HAUT :
+        avance = BAS
 
 
 def GetEntry(event):
