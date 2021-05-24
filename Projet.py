@@ -14,6 +14,7 @@
 ################
 
 # Import des librairies :
+from typing import Tuple
 from PIL import Image, ImageTk
 import tkinter as tk
 import random as rd
@@ -122,7 +123,7 @@ def Generate_Decor():
             elif x == (COL - 1):
                 etat[y][x] = MUR
     Change_Terrain()
-
+    print (echec, etat)
 
 def Draw():
     for y in range(ROW):
@@ -190,20 +191,13 @@ def AvanceSerpent():
             if etat[y][x] > 0:
                 etat[y][x] -= 1
     Generate_Decor()
+    cherche = 0
     for y in range(1, ROW-1):
         for x in range(1, COL-1):
-            if avance == DROITE:
-                if etat[y][x] == (tete - 1) and etat[x+1][y] == MUR or etat[y][x] == transfo and etat[x+1][y] > 0:
-                    echec = True
-            if avance == GAUCHE:
-                if etat[y][x] == (tete - 1) and etat[x-1][y] == MUR or etat[y][x] == transfo and etat[x-1][y] > 0:
-                    echec = True
-            if avance == BAS:
-                if etat[y][x] == (tete - 1) and etat[x][y+1] == MUR or etat[y][x] == transfo and etat[x][y+1] > 0:
-                    echec = True
-            if avance == HAUT:
-                if etat[y][x] == (tete - 1) and etat[x][y-1] == MUR or etat[y][x] == transfo and etat[x][y-1] > 0:
-                    echec = True
+            if etat[x][y] == transfo:
+                cherche +=1
+    if cherche == 0:
+        echec = True
 
 
 def Echec():
@@ -345,7 +339,6 @@ def Change_Terrain():
       for ligne in fic:
           note = ligne.rsplit(",")
       fic.close()
-      print("note = ", note)
       for i in range(0, len(note)):
         a = note[i]
         b = a.rsplit()
