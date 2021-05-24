@@ -312,9 +312,9 @@ def AffichageTopTen():
     for i in range(0, len(sorted_top_ten)) :
         inwrite = str(sorted_top_ten[0+i][1]) + " score = " + str(sorted_top_ten[0+i][0]) + "\n"
     
-    f = open('top10.txt', 'a')
-    f.write(inwrite)
-    f.close()
+        f = open('top10.txt', 'a')
+        f.write(inwrite)
+        f.close()
 
 
 def Terrain1():

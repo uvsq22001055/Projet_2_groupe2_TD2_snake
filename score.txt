@@ -21,3 +21,5 @@ lui score = 0
 Leandre_est_en_retard score = 0
 stop score = 0
 Yesay score = 0
+Leandre score = 1
+Testfinal score = 1
